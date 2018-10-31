@@ -1,1 +1,0 @@
-# Notebook_2DGPTermP
