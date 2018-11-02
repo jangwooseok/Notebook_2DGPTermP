@@ -17,7 +17,7 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 # 내가 추가함
 PI = 3.141592
-PATTERN1_TIME_PER_RADIAN = 0.25 * PI
+PATTERN1_TIME_PER_RADIAN = 1 * PI /60
 
 # Boy Action Speed
 # fill expressions correctly
@@ -50,8 +50,8 @@ class Pattern1:
         for i in range(200):
             bullet[i].x = 300
             bullet[i].y = 800
-            bullet[i].radian = i
-            bullet[i].radius = PI * 0.1 * i
+            bullet[i].radian =  PI * 0.3 * i
+            bullet[i].radius = i
         pass
 
     @staticmethod
@@ -60,8 +60,9 @@ class Pattern1:
 
     @staticmethod
     def do(Pattern):
-        #for i in range(200):
-        #    bullet.radian[i] -= PATTERN1_TIME_PER_RADIAN * game_framework.frame_time
+        for i in range(200):
+            bullet[i].radian += PATTERN1_TIME_PER_RADIAN * game_framework.frame_time
+            bullet[i].radius += 1
         pass
 
     @staticmethod
