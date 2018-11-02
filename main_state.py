@@ -6,7 +6,7 @@ from pico2d import *
 import game_framework
 import game_world
 
-from bullet import Bullet
+from pattern import Pattern
 from grass import Grass
 
 
@@ -15,11 +15,11 @@ name = "MainState"
 boy = None
 
 def enter():
-    global bullet
-    bullet = Bullet()
+    global pattern
+    pattern = Pattern()
     grass = Grass()
     game_world.add_object(grass, 0)
-    game_world.add_object(bullet, 1)
+    game_world.add_object(pattern, 1)
 
 
 def exit():
@@ -41,7 +41,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
                 game_framework.quit()
         else:
-            bullet.handle_event(event)
+            pattern.handle_event(event)
 
 
 def update():

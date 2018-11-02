@@ -1,6 +1,6 @@
 import game_framework
 from pico2d import *
-from ball import Ball
+from bullet import Bullet
 import math
 import random
 
@@ -41,6 +41,34 @@ key_event_table = {
 
 
 # States
+class Pattern1:
+
+    @staticmethod
+    def enter(Pattern, event):
+        global bullet
+        bullet = [Bullet() for i in range(200)]
+        for i in range(200):
+            bullet[i].x = 300
+            bullet[i].y = 800
+            bullet[i].radian = i
+            bullet[i].radius = PI * 0.1 * i
+        pass
+
+    @staticmethod
+    def exit(Pattern, event):
+        pass
+
+    @staticmethod
+    def do(Pattern):
+        #for i in range(200):
+        #    bullet.radian[i] -= PATTERN1_TIME_PER_RADIAN * game_framework.frame_time
+        pass
+
+    @staticmethod
+    def draw(Pattern):
+        for i in range(200):
+            bullet[i].image.draw(bullet[i].x + + bullet[i].radius * math.cos(bullet[i].radian), bullet[i].y + bullet[i].radius * math.sin(bullet[i].radian))
+
 
 
 
