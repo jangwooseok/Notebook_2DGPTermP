@@ -114,7 +114,7 @@ class Pattern2:
         Pattern.current_time = get_time()
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
-            if a < 20:
+            if a < 10:
                 #Pattern.fire(-300 - 25, 1000 - 50 * a, 0, 0 * PI, 2, 0.00)
                 #Pattern.fire(-300 - 25, 900 - 50 * a, 0, 0 * PI, 2, 0.00)
                 #Pattern.fire(-300 - 25, 800 - 50 * a, 0, 0 * PI, 2, 0.00)

@@ -130,7 +130,7 @@ next_state_table = {
 class Bacteria:
 
     def __init__(self):
-        self.x, self.y = 300, 900
+        self.x, self.y = 300, 100
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('Bacteria_100x500.png')
         self.font = load_font('ENCR10B.TTF',16)
