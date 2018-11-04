@@ -21,8 +21,16 @@ class Bullet:
 
 
     def update(self):
-        #self.x += self.velocity
-        self.radian -= self.delta_radian * PI
+
         self.radius += self.delta_radius
-        if self.radius > 1000 or self.radius < 0:
+        #if self.radius < 200:
+        #    self.radian -= self.delta_radian * 0.8 * PI
+        #elif self.radius > 200 and self.radius < 400:
+        #    self.radian -= self.delta_radian * 0.4 * PI
+        #else:
+        #    self.radian -= self.delta_radian * 0.2 * PI
+
+        self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2400
+
+        if self.radius > 1200 or self.radius < 0:
             game_world.remove_object(self)
