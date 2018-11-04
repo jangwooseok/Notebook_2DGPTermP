@@ -32,11 +32,6 @@ RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE = range(6)
 PATTERN1_LEFT, PATTERN1_RIGHT = range(2)
 
 key_event_table = {
-    (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
-    (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
-    (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
-    (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
 
 
@@ -166,7 +161,6 @@ class Pattern:
 
     def draw(self):
         self.cur_state.draw(self)
-        self.font.draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
         # fill here
 
     def handle_event(self, event):

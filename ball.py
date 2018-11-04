@@ -10,7 +10,7 @@ class Ball:
         self.x, self.y, self.velocity = x, y, velocity
 
     def draw(self):
-        self.image.draw(self.x, self.y)
+        draw(self.x, self.y)
 
     def update(self):
         self.x += self.velocity

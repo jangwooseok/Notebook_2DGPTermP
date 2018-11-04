@@ -7,7 +7,7 @@ import game_framework
 import game_world
 
 from pattern import Pattern
-#from grass import Grass
+from bacteria import Bacteria
 
 
 name = "MainState"
@@ -15,11 +15,11 @@ name = "MainState"
 boy = None
 
 def enter():
-    global pattern
+    global pattern, bacteria
     pattern = Pattern()
-    #grass = Grass()
-    #game_world.add_object(grass, 0)
-    game_world.add_object(pattern, 1)
+    bacteria = Bacteria()
+    game_world.add_object(pattern, 0)
+    game_world.add_object(bacteria, 1)
 
 
 def exit():
@@ -41,7 +41,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
                 game_framework.quit()
         else:
-            pattern.handle_event(event)
+            bacteria.handle_event(event)
 
 
 def update():
