@@ -1,6 +1,8 @@
 import game_framework
 from pico2d import *
 from bullet import Bullet
+from bacteria import Bacteria
+
 import math
 import random
 
@@ -28,8 +30,7 @@ FRAMES_PER_ACTION = 8
 
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SLEEP_TIMER, SPACE = range(6)
-PATTERN1_LEFT, PATTERN1_RIGHT = range(2)
+PATTERN1, PATTERN2 = range(2)
 
 key_event_table = {
 }
@@ -61,7 +62,7 @@ class Pattern1:
         Pattern.current_time = get_time()
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
-            if a < 50:
+            if a < 20:
                 Pattern.fire(300, 400, 0, -0.5 * PI, 1, 0.01)
                 Pattern.fire(300, 400, 0, 0.5 * PI, 1, 0.01)
                 Pattern.fire(100, 600, 0, -0.5 * PI, 1, 0.01)
@@ -79,6 +80,8 @@ class Pattern1:
                 Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 #Pattern.fire(0 - 25, 500 - 30 * a, 0, 0 * PI, 3, 0.00)
                 a += 1
+            else:
+                Pattern.add_event(PATTERN2)
         pass
 
     @staticmethod
@@ -105,15 +108,42 @@ class Pattern2:
 
     @staticmethod
     def do(Pattern):
-        global bullet
+        global bullet, bacteria
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
-            if a < 50:
-                Pattern.fire(300, 800, 0, -0.5 * PI, 1, 0.01)
+            if a < 20:
+                #Pattern.fire(-300 - 25, 1000 - 50 * a, 0, 0 * PI, 2, 0.00)
+                #Pattern.fire(-300 - 25, 900 - 50 * a, 0, 0 * PI, 2, 0.00)
+                #Pattern.fire(-300 - 25, 800 - 50 * a, 0, 0 * PI, 2, 0.00)
+                #Pattern.fire(-300 - 25, 700 - 50 * a, 0, 0 * PI, 2, 0.00)
+                #Pattern.fire(-300 - 25, 600 - 50 * a, 0, 0 * PI, 2, 0.00)
+
+                #Pattern.fire(900 + 25, 1050 - 50 * a, 0, -1 * PI, 2, 0.00)
+                #Pattern.fire(900 + 25, 950 - 50 * a, 0, -1 * PI, 2, 0.00)
+                #Pattern.fire(900 + 25, 850 - 50 * a, 0, -1 * PI, 2, 0.00)
+                #Pattern.fire(900 + 25, 750 - 50 * a, 0, -1 * PI, 2, 0.00)
+                #Pattern.fire(900 + 25, 650 - 50 * a, 0, -1 * PI, 2, 0.00)
+                Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
+                Pattern.fire(300, 500, 0, 0.50 * PI, 1.0, 0.0)
+                Pattern.fire(300, 500, 0, -1.00 * PI, 1.0, 0.0)
+                Pattern.fire(300, 500, 0, -0.50 * PI, 1.0, 0.0)
+
+                Pattern.fire(300, 500, 0, -0.00 * PI, 0.5, -0.01)
+                Pattern.fire(300, 500, 0, -1.00 * PI, 0.5, -0.01)
+                #Pattern.fire(300, 400, 0, -0.05 * PI, 0.5, -0.01)
+                #Pattern.fire(300, 400, 0, -0.10 * PI, 0.5, -0.01)
+
+                Pattern.fire(300, 500, 0, 0.00 * PI, 0.5, 0.01)
+                Pattern.fire(300, 500, 0, 1.00 * PI, 0.5, 0.01)
+                #Pattern.fire(300, 400, 0, 0.05 * PI, 0.5, 0.01)
+                #Pattern.fire(300, 400, 0, 0.10 * PI, 0.5, 0.01)
+
                 a += 1
+            else:
+                Pattern.add_event(PATTERN1)
         pass
 
     @staticmethod
@@ -124,8 +154,8 @@ class Pattern2:
 
 
 next_state_table = {
-    Pattern1: {},
-    Pattern2: {}
+    Pattern1: {PATTERN2: Pattern2},
+    Pattern2: {PATTERN1: Pattern1}
 }
 
 class Pattern:
@@ -141,7 +171,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern1
+        self.cur_state = Pattern2
         self.cur_state.enter(self, None)
 
         self.add_time = 0
