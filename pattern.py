@@ -46,12 +46,12 @@ class Pattern1:
     @staticmethod
     def enter(Pattern, event):
         global bullet
-        bullet = [Bullet() for i in range(200)]
-        for i in range(200):
-            bullet[i].x = 300
-            bullet[i].y = 800
-            bullet[i].radian =  PI * 0.3 * i
-            bullet[i].radius = i
+        global a, start_time
+        Pattern.add_time = 0
+        Pattern.current_time = get_time()
+
+        a = 0
+        start_time = get_time()
         pass
 
     @staticmethod
@@ -60,25 +60,67 @@ class Pattern1:
 
     @staticmethod
     def do(Pattern):
-        for i in range(200):
-            bullet[i].radian += PATTERN1_TIME_PER_RADIAN * game_framework.frame_time
-            bullet[i].radius += 1
+        global bullet
+        global start_time, a
+        Pattern.add_time += get_time() - Pattern.current_time
+        Pattern.current_time = get_time()
+        if Pattern.add_time >= 0.5:
+            Pattern.add_time = 0
+            if a < 50:
+                Pattern.fire(300, 800, 0, -0.5 * PI, 1, 0.01)
+                Pattern.fire(100, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                Pattern.fire(200, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                Pattern.fire(300, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                Pattern.fire(400, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                a += 1
         pass
 
     @staticmethod
     def draw(Pattern):
-        for i in range(200):
-            bullet[i].image.draw(bullet[i].x + + bullet[i].radius * math.cos(bullet[i].radian), bullet[i].y + bullet[i].radius * math.sin(bullet[i].radian))
+        pass
 
 
+class Pattern2:
 
+    @staticmethod
+    def enter(Pattern, event):
+        global bullet
+        global a, start_time
+        Pattern.add_time = 0
+        Pattern.current_time = get_time()
 
+        a = 0
+        start_time = get_time()
+        pass
+
+    @staticmethod
+    def exit(Pattern, event):
+        pass
+
+    @staticmethod
+    def do(Pattern):
+        global bullet
+        global start_time, a
+        Pattern.add_time += get_time() - Pattern.current_time
+        Pattern.current_time = get_time()
+        if Pattern.add_time >= 0.5:
+            Pattern.add_time = 0
+            if a < 50:
+                Pattern.fire(300, 800, 0, -0.5 * PI, 1, 0.01)
+                a += 1
+        pass
+
+    @staticmethod
+    def draw(Pattern):
+        pass
 
 
 
 
 next_state_table = {
-    Pattern1: {}
+    Pattern1: {},
+    Pattern2: {}
 }
 
 class Pattern:
@@ -96,6 +138,9 @@ class Pattern:
         self.event_que = []
         self.cur_state = Pattern1
         self.cur_state.enter(self, None)
+
+        self.add_time = 0
+        self.current_time = get_time()
 
 
     def add_event(self, event):
@@ -121,3 +166,8 @@ class Pattern:
 
     def add_bullet(self):
         game_world.add_object(bullet, 1)
+
+    def fire(self, x = 300, y = 500, radius = 0, radian = 0.0, delta_radius = 0.0, delta_radian = 0.0):
+        bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
+        game_world.add_object(bullet, 1)
+

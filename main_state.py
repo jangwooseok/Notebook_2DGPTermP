@@ -7,7 +7,7 @@ import game_framework
 import game_world
 
 from pattern import Pattern
-from grass import Grass
+#from grass import Grass
 
 
 name = "MainState"
@@ -17,8 +17,8 @@ boy = None
 def enter():
     global pattern
     pattern = Pattern()
-    grass = Grass()
-    game_world.add_object(grass, 0)
+    #grass = Grass()
+    #game_world.add_object(grass, 0)
     game_world.add_object(pattern, 1)
 
 
@@ -47,7 +47,6 @@ def handle_events():
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
-    #delay(0.1)
 
 
 def draw():
