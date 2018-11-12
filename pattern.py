@@ -36,6 +36,10 @@ key_event_table = {
 }
 
 
+# 이거 쓰면 값을 받아 올 수 있음
+#boy = main_state.get_boy()
+
+
 # States
 class Pattern1:
 
