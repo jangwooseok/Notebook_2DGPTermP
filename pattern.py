@@ -119,17 +119,7 @@ class Pattern2:
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
             if a < 10:
-                #Pattern.fire(-300 - 25, 1000 - 50 * a, 0, 0 * PI, 2, 0.00)
-                #Pattern.fire(-300 - 25, 900 - 50 * a, 0, 0 * PI, 2, 0.00)
-                #Pattern.fire(-300 - 25, 800 - 50 * a, 0, 0 * PI, 2, 0.00)
-                #Pattern.fire(-300 - 25, 700 - 50 * a, 0, 0 * PI, 2, 0.00)
-                #Pattern.fire(-300 - 25, 600 - 50 * a, 0, 0 * PI, 2, 0.00)
 
-                #Pattern.fire(900 + 25, 1050 - 50 * a, 0, -1 * PI, 2, 0.00)
-                #Pattern.fire(900 + 25, 950 - 50 * a, 0, -1 * PI, 2, 0.00)
-                #Pattern.fire(900 + 25, 850 - 50 * a, 0, -1 * PI, 2, 0.00)
-                #Pattern.fire(900 + 25, 750 - 50 * a, 0, -1 * PI, 2, 0.00)
-                #Pattern.fire(900 + 25, 650 - 50 * a, 0, -1 * PI, 2, 0.00)
                 Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
                 Pattern.fire(300, 500, 0, 0.50 * PI, 1.0, 0.0)
                 Pattern.fire(300, 500, 0, -1.00 * PI, 1.0, 0.0)
