@@ -20,6 +20,7 @@ class Bullet:
         self.image.draw(self.x + self.radius * math.cos(self.radian), self.y + self.radius * math.sin(self.radian))
 
 
+
     def update(self):
 
         self.radius += self.delta_radius

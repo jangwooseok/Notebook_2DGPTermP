@@ -155,7 +155,7 @@ next_state_table = {
 class Pattern:
 
     def __init__(self):
-        self.x, self.y = 1600 // 2, 90
+        self.x, self.y = 300, 1600 // 2
         self.radius = 0
         self.radian = -1 * PI
         # Boy is only once created, so instance image loading is fine
@@ -199,3 +199,5 @@ class Pattern:
         bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
         game_world.add_object(bullet, 1)
 
+    def get_bb(self):
+        return self.radius, self.x, self.y

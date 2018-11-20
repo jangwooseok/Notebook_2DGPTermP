@@ -74,6 +74,7 @@ class IdleState:
     @staticmethod
     def draw(bacteria):
         bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y)
+        print
 
 
 class RunState:
@@ -131,6 +132,7 @@ class Bacteria:
 
     def __init__(self):
         self.x, self.y = 300, 100
+        self.collideRadius = 50
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('Bacteria_100x500.png')
         self.font = load_font('ENCR10B.TTF',16)
@@ -158,6 +160,9 @@ class Bacteria:
         self.cur_state.draw(self)
         #draw(self.x - 60, self.y + 50, '(Time: %3.2f)' % get_time(), (255, 255, 0))
         # fill here
+
+    def get_bb(self):
+        return self.collideRadius, self.x, self.y
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:
