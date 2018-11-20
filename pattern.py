@@ -116,7 +116,7 @@ class Pattern2:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 0.5:
+        if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             if a < 10:
 
@@ -155,7 +155,7 @@ next_state_table = {
 class Pattern:
 
     def __init__(self):
-        self.x, self.y = 300, 1600 // 2
+        self.x, self.y = 0, 0
         self.radius = 0
         self.radian = -1 * PI
         # Boy is only once created, so instance image loading is fine

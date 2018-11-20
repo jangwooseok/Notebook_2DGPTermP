@@ -63,6 +63,7 @@ def update():
 
 
     if collide(bacteria, pattern):
+        #충돌 후 효과는 여기서 하면 됨
         print("COLLISION")
 
 def draw():
