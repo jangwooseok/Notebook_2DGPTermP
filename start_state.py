@@ -8,8 +8,12 @@ logo_time = 0.0
 
 
 def enter():
-    global image
+    global image, startSound
     image = load_image('kpu_credit.png')
+
+    startSound = load_music('start.mp3')
+    startSound.set_volume(64)
+    startSound.play(1)
 
     pass
 
@@ -22,6 +26,7 @@ def exit():
 
 
 def update():
+
     global logo_time
     if (logo_time > 1.0):
         logo_time = 0
