@@ -62,7 +62,9 @@ class IdleState:
             bacteria.y_velocity = 0
         elif event == DOWN_UP:
             bacteria.y_velocity = 0
+
         bacteria.timer = get_time()
+
 
     @staticmethod
     def exit(bacteria, event):
@@ -102,6 +104,7 @@ class RunState:
         bacteria.dir = clamp(-1, bacteria.x_velocity, 1)
         bacteria.dir = clamp(-1, bacteria.y_velocity, 1)
         # fill here
+
         pass
 
     @staticmethod
@@ -110,6 +113,15 @@ class RunState:
 
     @staticmethod
     def do(bacteria):
+
+        if bacteria.isImmune == True:
+            bacteria.timeAfterCollide = get_time() - bacteria.collideTime
+            if bacteria.timeAfterCollide >= 3:
+                bacteria.timeAfterCollide = 0
+                bacteria.collideTime = 0
+                bacteria.isImmune = False
+
+
         bacteria.frame = (bacteria.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 5
         bacteria.x += bacteria.x_velocity * game_framework.frame_time
         bacteria.y += bacteria.y_velocity * game_framework.frame_time
@@ -121,6 +133,7 @@ class RunState:
             else:
                 if main_state.collide(bacteria, bullet):
                     bacteria.isImmune = True
+                    bacteria.collideTime = get_time()
                     print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
 
 
@@ -164,6 +177,7 @@ class Bacteria:
         self.cur_state.enter(self, None)
 
         self.isImmune = False
+        self.timeAfterCollide, self.collideTime = 0, 0
         #self.isImmune = True
 
 
