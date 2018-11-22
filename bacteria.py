@@ -41,7 +41,7 @@ key_event_table = {
 
 # Boy States
 
-class ImmuneState:
+class IdleState:
 
     @staticmethod
     def enter(bacteria, event):
@@ -115,8 +115,12 @@ class RunState:
         bacteria.y += bacteria.y_velocity * game_framework.frame_time
 
         for bullet in game_world.objects[2]:
-            if main_state.collide(bacteria, bullet):
-                print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
+            if bacteria.isImmune == True:
+                print('놉')
+                break
+            else:
+                if main_state.collide(bacteria, bullet):
+                    print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
 
 
 
@@ -150,6 +154,9 @@ class Bacteria:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
+
+        #self.isImmune = False
+        self.isImmune = True
 
 
     def add_event(self, event):
