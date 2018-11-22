@@ -14,8 +14,8 @@ RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-GHOST_ASSENTION_SPEED_CMPS = 30.0
-GHOST_TIME_PER_RADIAN = 4 * 3.141592 * 60
+COLLIDE_SIZE = 15
+
 # Boy Action Speed
 # fill expressions correctly
 TIME_PER_ACTION = 0.5
@@ -25,7 +25,7 @@ FRAMES_PER_ACTION = 5
 
 
 # Boy Event
-RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_DOWN, DOWN_DOWN, UP_UP, DOWN_UP = range(8)
+RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, UP_DOWN, DOWN_DOWN, UP_UP, DOWN_UP, SHIFT_DOWN, SHIFT_UP = range(10)
 
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -35,7 +35,9 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_UP): UP_DOWN,
     (SDL_KEYDOWN, SDLK_DOWN): DOWN_DOWN,
     (SDL_KEYUP, SDLK_UP): UP_UP,
-    (SDL_KEYUP, SDLK_DOWN): DOWN_UP
+    (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
+    (SDL_KEYDOWN, SDLK_LSHIFT): SHIFT_DOWN,
+    (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP
 }
 
 
@@ -84,6 +86,11 @@ class RunState:
 
     @staticmethod
     def enter(bacteria, event):
+        #if event == SHIFT_DOWN:
+        #    RUN_SPEED_PPS = RUN_SPEED_PPS * 0.5
+        #elif event == SHIFT_UP:
+        #    RUN_SPEED_PPS = RUN_SPEED_PPS * 2
+
         if event == RIGHT_DOWN:
             bacteria.x_velocity = RUN_SPEED_PPS
         elif event == LEFT_DOWN:
@@ -142,11 +149,12 @@ class RunState:
 
 
     def draw(bacteria):
-        bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y)
+        bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75 , 75 )
         if bacteria.isImmune == True:
-            bacteria.imageIdle.draw(bacteria.x, bacteria.y)
+            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, COLLIDE_SIZE, COLLIDE_SIZE)
         elif bacteria.isImmune == False:
-            bacteria.imageImmune.draw(bacteria.x, bacteria.y)
+            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, COLLIDE_SIZE, COLLIDE_SIZE)
+
         pass
 
 
@@ -155,7 +163,7 @@ next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
                 UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState},
     RunState: {RIGHT_UP: RunState, LEFT_UP: RunState, LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
-               UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState}
+               UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState, SHIFT_UP: RunState, SHIFT_UP: RunState}
 }
 
 class Bacteria:
@@ -173,7 +181,7 @@ class Bacteria:
         self.y_velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = IdleState
+        self.cur_state = RunState
         self.cur_state.enter(self, None)
 
         self.isImmune = False
@@ -199,7 +207,7 @@ class Bacteria:
         # fill here
 
     def get_bb(self):
-        return 15, self.x, self.y
+        return COLLIDE_SIZE - 3, self.x, self.y
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

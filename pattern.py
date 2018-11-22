@@ -69,6 +69,8 @@ class Pattern1:
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
             if a < 20:
+                a += 1
+
                 Pattern.fireSound.play(1)
 
                 #bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
@@ -89,9 +91,9 @@ class Pattern1:
                 Pattern.fire(400, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 #Pattern.fire(0 - 25, 500 - 30 * a, 0, 0 * PI, 3, 0.00)
-                a += 1
             else:
-                Pattern.add_event(PATTERN2)
+                #Pattern.add_event(PATTERN2)
+                pass
         pass
 
     @staticmethod
@@ -171,7 +173,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Pattern1
         self.cur_state.enter(self, None)
 
         self.add_time = 0
