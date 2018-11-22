@@ -22,6 +22,7 @@ def enter():
     bacteria = Bacteria()
     game_world.add_object(pattern, 0)
     game_world.add_object(bacteria, 1)
+    
 
 
 def exit():
@@ -61,6 +62,7 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
 
+    # boy = main_state.get_boy()
 
     if collide(bacteria, pattern):
         #충돌 후 효과는 여기서 하면 됨
