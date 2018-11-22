@@ -4,6 +4,7 @@ from pico2d import *
 import random
 
 import game_world
+import main_state
 
 # Boy Run Speed
 # fill expressions correctly
@@ -113,6 +114,12 @@ class RunState:
         bacteria.x += bacteria.x_velocity * game_framework.frame_time
         bacteria.y += bacteria.y_velocity * game_framework.frame_time
 
+        for bullet in game_world.objects[2]:
+            if main_state.collide(bacteria, bullet):
+                print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
+
+
+
         #bacteria.x = clamp(25, bacteria.x, 1600 - 25)
 
 
@@ -162,7 +169,7 @@ class Bacteria:
         # fill here
 
     def get_bb(self):
-        return self.collideRadius, self.x, self.y
+        return 15, self.x, self.y
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

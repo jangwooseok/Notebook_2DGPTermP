@@ -67,16 +67,19 @@ class Pattern1:
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
             if a < 20:
-                Pattern.fire(300, 400, 0, -0.5 * PI, 1, 0.01)
-                Pattern.fire(300, 400, 0, 0.5 * PI, 1, 0.01)
-                Pattern.fire(100, 600, 0, -0.5 * PI, 1, 0.01)
-                Pattern.fire(100, 600, 0, 0.5 * PI, 1, 0.01)
-                Pattern.fire(100, 600, 0, -1.0 * PI, 1, 0.01)
-                Pattern.fire(100, 600, 0, 0.0 * PI, 1, 0.01)
-                Pattern.fire(500, 600, 0, -0.5 * PI, 1, -0.01)
-                Pattern.fire(500, 600, 0, 0.5 * PI, 1, -0.01)
-                Pattern.fire(500, 600, 0, -1.0 * PI, 1, -0.01)
-                Pattern.fire(500, 600, 0, 0.0 * PI, 1, -0.01)
+
+                #bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
+
+                Pattern.fire(300, 400, 0, -0.5 * PI, +1, +0.005 * PI)
+                Pattern.fire(300, 400, 0, +0.5 * PI, +1, +0.005 * PI)
+                Pattern.fire(100, 600, 0, -0.5 * PI, +1, +0.005 * PI)
+                Pattern.fire(100, 600, 0, +0.5 * PI, +1, +0.005 * PI)
+                Pattern.fire(100, 600, 0, -1.0 * PI, +1, +0.005 * PI)
+                Pattern.fire(100, 600, 0, +0.0 * PI, +1, +0.005 * PI)
+                Pattern.fire(500, 600, 0, -0.5 * PI, +1, -0.005 * PI)
+                Pattern.fire(500, 600, 0, +0.5 * PI, +1, -0.005 * PI)
+                Pattern.fire(500, 600, 0, -1.0 * PI, +1, -0.005 * PI)
+                Pattern.fire(500, 600, 0, +0.0 * PI, +1, -0.005 * PI)
                 Pattern.fire(100, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 Pattern.fire(200, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 Pattern.fire(300, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
@@ -193,11 +196,11 @@ class Pattern:
             self.add_event(key_event)
 
     def add_bullet(self):
-        game_world.add_object(bullet, 1)
+        game_world.add_object(bullet, 2)
 
     def fire(self, x = 300, y = 500, radius = 0, radian = 0.0, delta_radius = 0.0, delta_radian = 0.0):
         bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
-        game_world.add_object(bullet, 1)
+        game_world.add_object(bullet, 2)
 
     def get_bb(self):
         return self.radius, self.x, self.y

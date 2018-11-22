@@ -15,15 +15,20 @@ class Bullet:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
         self.x, self.y = x, y
 
+        self.bulletX, self.bulletY = 0, 0
+
     def draw(self):
         #self.image.draw(self.x, self.y)
-        self.image.draw(self.x + self.radius * math.cos(self.radian), self.y + self.radius * math.sin(self.radian))
+        self.image.draw( self.bulletX, self.bulletY)
 
-
+    def get_bb(self):
+        return 25, self.bulletX, self.bulletY
 
     def update(self):
 
         self.radius += self.delta_radius
+        self.bulletX = self.x + self.radius * math.cos(self.radian)
+        self.bulletY = self.y + self.radius * math.sin(self.radian)
         #if self.radius < 200:
         #    self.radian -= self.delta_radian * 0.8 * PI
         #elif self.radius > 200 and self.radius < 400:
