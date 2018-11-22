@@ -15,6 +15,8 @@ class Bullet:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
         self.x, self.y = x, y
 
+
+
         self.bulletX, self.bulletY = 0, 0
 
     def draw(self):

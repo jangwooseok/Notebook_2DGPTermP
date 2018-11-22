@@ -180,9 +180,7 @@ class Bacteria:
         self.timeAfterCollide, self.collideTime = 0, 0
         #self.isImmune = True
 
-        self.bgm = load_music('toby_fox_UNDERTALE_Soundtrack_100_MEGALOVANIA.mp3')
-        self.bgm.set_volume(32)
-        self.bgm.repeat_play()
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)

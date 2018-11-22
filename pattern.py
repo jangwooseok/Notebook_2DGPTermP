@@ -50,6 +50,8 @@ class Pattern1:
         Pattern.add_time = 0
         Pattern.current_time = get_time()
 
+
+
         a = 0
         start_time = get_time()
         pass
@@ -67,6 +69,7 @@ class Pattern1:
         if Pattern.add_time >= 0.5:
             Pattern.add_time = 0
             if a < 20:
+                Pattern.fireSound.play(1)
 
                 #bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
 
@@ -174,13 +177,18 @@ class Pattern:
         self.add_time = 0
         self.current_time = get_time()
 
-        self.bulletSound = load_music('pickup.wav')
+        self.bgm = load_music('toby_fox_UNDERTALE_Soundtrack_100_MEGALOVANIA.mp3')
+        self.bgm.set_volume(32)
+        self.bgm.repeat_play()
 
+        self.fireSound = load_wav('pickup.wav')
+        self.fireSound.set_volume(32)
 
     def add_event(self, event):
         self.event_que.insert(0, event)
 
     def update(self):
+
         self.cur_state.do(self)
         if len(self.event_que) > 0:
             event = self.event_que.pop()
@@ -201,8 +209,7 @@ class Pattern:
         game_world.add_object(bullet, 2)
 
     def fire(self, x = 300, y = 500, radius = 0, radian = 0.0, delta_radius = 0.0, delta_radian = 0.0):
-        self.bulletSound.set_volume(32)
-        self.bulletSound.play(1)
+
         bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
         game_world.add_object(bullet, 2)
 
