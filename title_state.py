@@ -8,8 +8,12 @@ logo_time = 0.0
 
 
 def enter():
-    global image
+    global image, titleSound
     image = load_image('title.png')
+
+    titleSound = load_music('title_BGM.mp3')
+    titleSound.set_volume(64)
+    titleSound.repeat_play()
 
     pass
 
@@ -17,13 +21,13 @@ def enter():
 def exit():
     global image
     del (image)
-
+    titleSound.stop()
     pass
 
 
 def update():
     global logo_time
-    if (logo_time > 2.0):
+    if (logo_time > 1.0):
         logo_time = 0
         game_framework.quit()
     delay(0.01)
@@ -36,8 +40,6 @@ def draw():
     global image
     clear_canvas()
     image.clip_draw(0, 0, 1690, 1122, 600//2, 1000//2,600,1000)      #(self, left, bottom, width, height, x, y, w=None, h=None):
-    #clip_composite_draw(self, left, bottom, width, height, rad, flip, x, y, w=None, h=None):
-    #image.clip_composite_draw(0,0,1690,1122,0, '',600//2,1000//2, 600,1000)
     update_canvas()
     pass
 

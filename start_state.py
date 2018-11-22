@@ -9,7 +9,7 @@ logo_time = 0.0
 
 def enter():
     global image, startSound
-    image = load_image('kpu_credit.png')
+    image = load_image('stop.png')
 
     startSound = load_music('start.mp3')
     startSound.set_volume(64)
@@ -40,7 +40,7 @@ def update():
 def draw():
     global image
     clear_canvas()
-    image.draw(400, 300)
+    image.clip_draw(0, 0, 1500, 1000, 600//2, 1000//2, 600, 1000)
     update_canvas()
     pass
 
