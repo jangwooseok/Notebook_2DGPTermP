@@ -120,6 +120,7 @@ class RunState:
                 break
             else:
                 if main_state.collide(bacteria, bullet):
+                    bacteria.isImmune = True
                     print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
 
 
@@ -129,7 +130,12 @@ class RunState:
 
     def draw(bacteria):
         bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y)
+        if bacteria.isImmune == True:
+            bacteria.imageIdle.draw(bacteria.x, bacteria.y)
+        elif bacteria.isImmune == False:
+            bacteria.imageImmune.draw(bacteria.x, bacteria.y)
         pass
+
 
 
 next_state_table = {
@@ -146,6 +152,8 @@ class Bacteria:
         self.collideRadius = 50
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('Bacteria_100x500.png')
+        self.imageIdle = load_image('Bacteria_idle_30x30.png')
+        self.imageImmune = load_image('Bacteria_immune_30x30.png')
         self.font = load_font('ENCR10B.TTF',16)
         self.dir = 1
         self.x_velocity = 0
@@ -155,8 +163,8 @@ class Bacteria:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
 
-        #self.isImmune = False
-        self.isImmune = True
+        self.isImmune = False
+        #self.isImmune = True
 
 
     def add_event(self, event):
