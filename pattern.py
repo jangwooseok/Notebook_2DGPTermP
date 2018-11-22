@@ -174,6 +174,8 @@ class Pattern:
         self.add_time = 0
         self.current_time = get_time()
 
+        self.bulletSound = load_music('pickup.wav')
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -199,6 +201,8 @@ class Pattern:
         game_world.add_object(bullet, 2)
 
     def fire(self, x = 300, y = 500, radius = 0, radian = 0.0, delta_radius = 0.0, delta_radian = 0.0):
+        self.bulletSound.set_volume(32)
+        self.bulletSound.play(1)
         bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
         game_world.add_object(bullet, 2)
 
