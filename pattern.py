@@ -66,29 +66,28 @@ class Pattern1:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 1:
+        if Pattern.add_time >= 1.0:
             Pattern.add_time = 0
             if a < 20:
-                a += 1
 
                 Pattern.fireSound.play(1)
 
 
                 #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-                for n in range(32):
-                    Pattern.fire(300, 800, 0, 5 * n - 180, +1, 0)
+                if a < 10:
+                    for n in range(30):
+                        if a % 2 == 0:
+                            Pattern.fire(300, 800, 0, -6 * n, +1, 0)
+                        else:
+                            Pattern.fire(300, 800, 0, -6 * n + 3, +1, 0)
+                else:
+                    for n in range(30):
+                        if a % 2 == 0:
+                            Pattern.fire(300, 800, 0, -6 * n, +1, 0.1)
+                        else:
+                            Pattern.fire(300, 800, 0, -6 * n + 3, +1, -0.1)
+                a += 1
 
-
-                #Pattern.fire(500, 600, 0, -0.5 * PI, +1, -0.005 * PI)
-                #Pattern.fire(500, 600, 0, +0.5 * PI, +1, -0.005 * PI)
-                #Pattern.fire(500, 600, 0, -1.0 * PI, +1, -0.005 * PI)
-                #Pattern.fire(500, 600, 0, +0.0 * PI, +1, -0.005 * PI)
-                #Pattern.fire(100, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                #Pattern.fire(200, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                #Pattern.fire(300, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                #Pattern.fire(400, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                #Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                #Pattern.fire(0 - 25, 500 - 30 * a, 0, 0 * PI, 3, 0.00)
             else:
                 #Pattern.add_event(PATTERN2)
                 pass
@@ -124,26 +123,16 @@ class Pattern2:
         Pattern.current_time = get_time()
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
-            if a < 10:
+            if a < 20:
+                #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+                bullet_amount = 5
+                for n in range(bullet_amount):
+                    seprate = 50
+                    Pattern.fire(300 - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
+                    Pattern.fire(300 - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
+                    Pattern.fire(400, 800 - seprate * n, 0, -90, 1, 0)
+                    Pattern.fire(200, 800 - seprate * n, 0, -90, 1, 0)
 
-                Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
-
-
-
-                Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
-                Pattern.fire(300, 500, 0, 0.50 * PI, 1.0, 0.0)
-                Pattern.fire(300, 500, 0, -1.00 * PI, 1.0, 0.0)
-                Pattern.fire(300, 500, 0, -0.50 * PI, 1.0, 0.0)
-
-                Pattern.fire(300, 500, 0, -0.00 * PI, 0.5, -0.01)
-                Pattern.fire(300, 500, 0, -1.00 * PI, 0.5, -0.01)
-                #Pattern.fire(300, 400, 0, -0.05 * PI, 0.5, -0.01)
-                #Pattern.fire(300, 400, 0, -0.10 * PI, 0.5, -0.01)
-
-                Pattern.fire(300, 500, 0, 0.00 * PI, 0.5, 0.01)
-                Pattern.fire(300, 500, 0, 1.00 * PI, 0.5, 0.01)
-                #Pattern.fire(300, 400, 0, 0.05 * PI, 0.5, 0.01)
-                #Pattern.fire(300, 400, 0, 0.10 * PI, 0.5, 0.01)
 
                 a += 1
             else:
@@ -175,7 +164,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern1
+        self.cur_state = Pattern2
         self.cur_state.enter(self, None)
 
         self.add_time = 0

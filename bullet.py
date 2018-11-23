@@ -3,6 +3,7 @@ import game_world
 
 PI = 3.141592
 
+COLLIDE_SIZE = 15
 
 class Bullet:
     image = None
@@ -24,7 +25,7 @@ class Bullet:
         self.image.draw( self.bulletX, self.bulletY)
 
     def get_bb(self):
-        return 25, self.bulletX, self.bulletY
+        return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
 
@@ -38,7 +39,7 @@ class Bullet:
         #else:
         #    self.radian -= self.delta_radian * 0.2 * PI
 
-        self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2400
+        self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/3600
 
         if self.radius > 1200 or self.radius < 0:
             game_world.remove_object(self)
