@@ -118,7 +118,7 @@ class Pattern2:
 
     @staticmethod
     def do(Pattern):
-        global bullet, bacteria
+        global bullet
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
@@ -134,12 +134,14 @@ class Pattern2:
             if a < 20:
                 k = a % 5
                 if k == 0:
+                    #추가중
+                    Pattern.want_remove()
                     for n in range(bullet_amount):
                         seprate = 50
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos + seprate * 2, 800 - seprate * n, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2, 800 - seprate * n, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - 200, 0, -90, 0, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos, 0, -90, 0, 0)
+                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * n, 0, -90, 0, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * n, 0, -90, 0, 0)
 
 
                 a += 1
@@ -303,6 +305,7 @@ next_state_table = {
     Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4}
 }
 
+
 class Pattern:
 
     def __init__(self):
@@ -357,8 +360,9 @@ class Pattern:
 
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
         game_world.add_object(bullet, 2)
-    def remove_bullet(self):
-        game_world.remove_object(bullet)
+
+    def want_remove(self):
+        return True
         pass
 
     def get_bb(self):
@@ -385,6 +389,13 @@ class Pattern:
             self.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0)  # E
             pass
 
+    def draw_square(self, k, bullet_xpos, bullet_ypos, bullet_speed):
+        for n in range(bullet_amount):
+            seprate = 50
+            self.fire(bullet_xpos - seprate * 2 + seprate * n, 600, 0, -90, 0, 0)
+            self.fire(bullet_xpos - seprate * 2 + seprate * n, 800, 0, -90, 0, 0)
+            self.fire(bullet_xpos + seprate * 2, 800 - seprate * n, 0, -90, 0, 0)
+            self.fire(bullet_xpos - seprate * 2, 800 - seprate * n, 0, -90, 0, 0)
 
 #for n in range(bullet_amount):
 #    seprate = 50

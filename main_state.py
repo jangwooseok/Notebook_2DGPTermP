@@ -45,6 +45,12 @@ def collide(a, b):
         return True
     return False
 
+# 추가중
+def is_remove(a):
+    if a.want_remove() == True:
+        return True
+    return False
+
 
 
 def handle_events():

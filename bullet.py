@@ -1,5 +1,10 @@
 from pico2d import *
 import game_world
+import main_state
+
+#안된다 이유를 모르겠다
+from pattern import Pattern
+
 
 PI = 3.141592
 
@@ -15,8 +20,7 @@ class Bullet:
         if Bullet.image == None:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
         self.x, self.y = x, y
-
-
+        self.is_remove = False
 
         self.bulletX, self.bulletY = 0, 0
 
@@ -28,18 +32,12 @@ class Bullet:
         return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
+        #self.is_remove = main_state.is_remove(Pattern1)
         self.radius += self.delta_radius
         self.bulletX = self.x + self.radius * math.cos(self.radian)
         self.bulletY = self.y + self.radius * math.sin(self.radian)
 
-        #if self.radius < 200:
-        #    self.radian -= self.delta_radian * 0.8 * PI
-        #elif self.radius > 200 and self.radius < 400:
-        #    self.radian -= self.delta_radian * 0.4 * PI
-        #else:
-        #    self.radian -= self.delta_radian * 0.2 * PI
-
         self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2800
 
-        if self.radius > 1200 or self.radius < 0:
+        if self.radius > 1200 or self.radius < 0 or self.is_remove == True:
             game_world.remove_object(self)
