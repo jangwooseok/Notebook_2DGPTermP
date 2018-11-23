@@ -66,23 +66,30 @@ class Pattern1:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 1.5:
+
+        bullet_speed = 2.0
+        bullet_ypos = 800
+        bullet_xpos = 300
+
+        if Pattern.add_time >= 1.0:
             Pattern.add_time = 0
+
+
             if a < 20:
                 Pattern.fireSound.play(1)
                 #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
                 if a < 10:
                     for n in range(30):
                         if a % 2 == 0:
-                            Pattern.fire(300, 800, 0, -6 * n, +1, 0)
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n, bullet_speed, 0)
                         else:
-                            Pattern.fire(300, 800, 0, -6 * n + 3, +1, 0)
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, 0)
                 else:
                     for n in range(30):
                         if a % 2 == 0:
-                            Pattern.fire(300, 800, 0, -6 * n, +1, 0.1)
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n, bullet_speed, 0.1)
                         else:
-                            Pattern.fire(300, 800, 0, -6 * n + 3, +1, -0.1)
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, -0.1)
                 a += 1
             else:
                 Pattern.add_event(PATTERN2)
@@ -179,17 +186,17 @@ class Pattern3:
                         if n != 2 and n != 3 and n != 10 and n != 11:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
 
-                elif (4 <= a and a < 6) or a == 14 or (9 <= a and a < 11):
+                elif (4 == a ) or a == 14 or (a == 9 ):
                     for n in range(bullet_amount):
                         if n < 2 or n > 11:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
 
-                elif 6 <= a and a < 9:
+                elif 5 <= a and a < 9:
                     for n in range(bullet_amount):
                         if n != 6 and n != 7 and n != 10 and n != 11:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
 
-                elif a == 11:
+                elif a == 11 and a == 10:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 9 and n != 10:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
@@ -267,9 +274,13 @@ class Pattern4:
                 k = a % 13
                 Pattern.draw_DIE(k, bullet_xpos, bullet_ypos, bullet_speed)
                 if k == 7:
-                    for n in range(180):
-                        if n == 0 :
-                           Pattern.fire(bullet_xpos, bullet_ypos, 0, 2 * n, bullet_speed, 0.25)
+                    for n in range(40):
+                        for i in range(6):
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 90 * i + n, bullet_speed, 0.5)
+                if k == 10:
+                    for n in range(40):
+                        for i in range(6):
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + n, bullet_speed, 0.7)
 
                 a += 1
 
@@ -298,7 +309,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern4
+        self.cur_state = Pattern3
         self.cur_state.enter(self, None)
 
         self.add_time = 0
