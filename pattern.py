@@ -218,7 +218,7 @@ class Pattern3:
 
                 elif a == 17:
                     for n in range(bullet_amount):
-                        if n != 7 and n != 8 and n != 10 and n != 11:
+                        if n != 10 and n != 11:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
 
                 elif 18 <= a and a < 23 :
