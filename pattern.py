@@ -66,7 +66,7 @@ class Pattern1:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 1.0:
+        if Pattern.add_time >= 1.5:
             Pattern.add_time = 0
             if a < 20:
                 Pattern.fireSound.play(1)
