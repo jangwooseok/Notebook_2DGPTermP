@@ -30,7 +30,7 @@ FRAMES_PER_ACTION = 8
 
 
 # Boy Event
-PATTERN1, PATTERN2 = range(2)
+PATTERN1, PATTERN2, PATTERN3, PATTERN4 = range(4)
 
 key_event_table = {
 }
@@ -49,11 +49,11 @@ class Pattern1:
         global a, start_time
         Pattern.add_time = 0
         Pattern.current_time = get_time()
-
-
-
         a = 0
         start_time = get_time()
+
+        print('111111111111')
+
         pass
 
     @staticmethod
@@ -69,10 +69,7 @@ class Pattern1:
         if Pattern.add_time >= 1.0:
             Pattern.add_time = 0
             if a < 20:
-
                 Pattern.fireSound.play(1)
-
-
                 #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
                 if a < 10:
                     for n in range(30):
@@ -87,16 +84,12 @@ class Pattern1:
                         else:
                             Pattern.fire(300, 800, 0, -6 * n + 3, +1, -0.1)
                 a += 1
-
             else:
-                #Pattern.add_event(PATTERN2)
+                Pattern.add_event(PATTERN2)
                 pass
         pass
-
-    @staticmethod
     def draw(Pattern):
         pass
-
 
 class Pattern2:
 
@@ -106,6 +99,7 @@ class Pattern2:
         global a, start_time
         Pattern.add_time = 0
         Pattern.current_time = get_time()
+        print('22222222222222222')
 
         a = 0
         start_time = get_time()
@@ -123,20 +117,20 @@ class Pattern2:
         Pattern.current_time = get_time()
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
+            #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+            bullet_amount = 5
+            for n in range(bullet_amount):
+                seprate = 50
+                Pattern.fire(300 - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
+                Pattern.fire(300 - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
+                Pattern.fire(400, 800 - seprate * n, 0, -90, 1, 0)
+                Pattern.fire(200, 800 - seprate * n, 0, -90, 1, 0)
             if a < 20:
-                #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-                bullet_amount = 5
-                for n in range(bullet_amount):
-                    seprate = 50
-                    Pattern.fire(300 - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
-                    Pattern.fire(300 - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
-                    Pattern.fire(400, 800 - seprate * n, 0, -90, 1, 0)
-                    Pattern.fire(200, 800 - seprate * n, 0, -90, 1, 0)
 
 
                 a += 1
             else:
-                Pattern.add_event(PATTERN1)
+                Pattern.add_event(PATTERN3)
         pass
 
     @staticmethod
@@ -144,11 +138,152 @@ class Pattern2:
         pass
 
 
+class Pattern3:
+
+    @staticmethod
+    def enter(Pattern, event):
+        global bullet
+        global a, start_time
+        Pattern.add_time = 0
+        Pattern.current_time = get_time()
+
+        print('33333333333333333')
+        a = 0
+        start_time = get_time()
+        pass
+
+    @staticmethod
+    def exit(Pattern, event):
+        pass
+
+    @staticmethod
+    def do(Pattern):
+        global bullet, bacteria
+        global start_time, a
+        Pattern.add_time += get_time() - Pattern.current_time
+        Pattern.current_time = get_time()
+        if Pattern.add_time >= 0.6:
+            Pattern.add_time = 0
+            #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+            seprate = 50
+
+            bullet_amount = 13
+            bullet_speed = 1.5
+            bullet_ypos = 1200
+            bullet_move_down = -90
 
 
+            if a < 25:
+                if a < 4:
+                    for n in range(bullet_amount):
+                        if n != 2 and n != 3 and n != 10 and n != 11:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif (4 <= a and a < 6) or a == 14 or (9 <= a and a < 11):
+                    for n in range(bullet_amount):
+                        if n < 2 or n > 11:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif 6 <= a and a < 9:
+                    for n in range(bullet_amount):
+                        if n != 6 and n != 7 and n != 10 and n != 11:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif a == 11:
+                    for n in range(bullet_amount):
+                        if n != 2 and n != 3 and n != 9 and n != 10:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif a == 12:
+                    for n in range(bullet_amount):
+                        if n != 2 and n != 3 and n != 9:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif a == 13:
+                    for n in range(bullet_amount):
+                        if n == 0 or n == 1 or n == 9 or n == 12:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif a == 15 or a == 16:
+                    for n in range(bullet_amount):
+                        if n != 7 and n != 8 and n != 10 and n != 11:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif a == 17:
+                    for n in range(bullet_amount):
+                        if n != 7 and n != 8 and n != 10 and n != 11:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                elif 18 <= a and a < 23 :
+                    for n in range(bullet_amount):
+                        if n < 23 - a or n == 12:
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+
+                a += 1
+
+            else :
+                Pattern.add_event(PATTERN4)
+        pass
+
+    @staticmethod
+    def draw(Pattern):
+        pass
+
+
+class Pattern4:
+
+    @staticmethod
+    def enter(Pattern, event):
+        global bullet
+        global a, start_time
+        Pattern.add_time = 0
+        Pattern.current_time = get_time()
+
+        print('4444444444444')
+        a = 0
+        start_time = get_time()
+        pass
+
+    @staticmethod
+    def exit(Pattern, event):
+        pass
+
+    @staticmethod
+    def do(Pattern):
+        global bullet, bacteria
+        global start_time, a
+        Pattern.add_time += get_time() - Pattern.current_time
+        Pattern.current_time = get_time()
+        if Pattern.add_time >= 0.8:
+            Pattern.add_time = 0
+            #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+            seprate = 50
+
+            bullet_speed = 1.0
+            bullet_ypos = 800
+            bullet_xpos = 300
+
+            if a < 25:
+                if a < 5:
+                    Pattern.fire(bullet_xpos, bullet_ypos, 0, -120, bullet_speed, 0)
+                if a == 0 or a == 4:
+                    for n in range(10):
+                        Pattern.fire(bullet_xpos, bullet_ypos, 0, -120 + n, bullet_speed, 0)
+                if 1 <= a and a <= 3:
+                    for n in range(10):
+                        Pattern.fire(bullet_xpos, bullet_ypos, 0, -120 + 10 + n, bullet_speed, 0)
+                a += 1
+
+            else :
+                Pattern.add_event(PATTERN1)
+        pass
+    def draw(Pattern):
+        pass
 next_state_table = {
-    Pattern1: {PATTERN2: Pattern2},
-    Pattern2: {PATTERN1: Pattern1}
+    Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4},
+    Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4},
+    Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4},
+    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4}
 }
 
 class Pattern:
@@ -159,12 +294,12 @@ class Pattern:
         self.radian = -1 * PI
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('WhiteBloodCell_50x50.png')
-        self.font = load_font('ENCR10B.TTF',16)
+        self.font = load_font('ENCR10B.TTF', 16)
         self.dir = 1
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Pattern1
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -208,3 +343,11 @@ class Pattern:
 
     def get_bb(self):
         return self.radius, self.x, self.y
+
+
+#for n in range(bullet_amount):
+#    seprate = 50
+#    Pattern.fire(300 - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
+#    Pattern.fire(300 - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
+#    Pattern.fire(400, 800 - seprate * n, 0, -90, 1, 0)
+#    Pattern.fire(200, 800 - seprate * n, 0, -90, 1, 0)

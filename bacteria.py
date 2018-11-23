@@ -14,9 +14,10 @@ import main_state
 #RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 #RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-RUN_SPEED_PPS = 70
+RUN_SPEED_PPS = 120
 
-COLLIDE_SIZE = 15
+COLLIDE_SIZE = 10
+DRAW_SIZE = COLLIDE_SIZE * 2
 
 # Boy Action Speed
 # fill expressions correctly
@@ -137,7 +138,7 @@ class RunState:
 
         for bullet in game_world.objects[2]:
             if bacteria.isImmune == True:
-                print('놉')
+                #print('놉')
                 break
             else:
                 if main_state.collide(bacteria, bullet):
@@ -151,11 +152,11 @@ class RunState:
 
 
     def draw(bacteria):
-        bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75 , 75 )
+        bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
         if bacteria.isImmune == True:
-            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, COLLIDE_SIZE, COLLIDE_SIZE)
+            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, DRAW_SIZE, DRAW_SIZE)
         elif bacteria.isImmune == False:
-            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, COLLIDE_SIZE, COLLIDE_SIZE)
+            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, DRAW_SIZE, DRAW_SIZE)
 
         pass
 
