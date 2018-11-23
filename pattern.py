@@ -254,30 +254,22 @@ class Pattern4:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 0.5:
+        if Pattern.add_time >= 0.25:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
             seprate = 50
 
-            bullet_speed = 1.0
+            bullet_speed = 2.0
             bullet_ypos = 800
             bullet_xpos = 300
 
-            if a < 25:
-                if a == 0 or a == 4:
-                    for n in range(10):
-                        Pattern.fire(bullet_xpos, bullet_ypos, 0, -115 + n, bullet_speed, 0) #D
-                        Pattern.fire(bullet_xpos, bullet_ypos, 0, -90 + n/2, bullet_speed, 0)  # I
-                        Pattern.fire(bullet_xpos, bullet_ypos, 0, -90 - n/2, bullet_speed, 0)  # I
-
-                if 1 <= a and a <= 3:
-                    Pattern.fire(bullet_xpos, bullet_ypos, 0, -115 + 12, bullet_speed, 0) #D
-
-                if a < 5:
-                    Pattern.fire(bullet_xpos, bullet_ypos, 0, -115, bullet_speed, 0) # D
-                    Pattern.fire(bullet_xpos, bullet_ypos, 0, -90, bullet_speed, 0)  # I
-                    Pattern.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0)  # I
-                    pass
+            if a < 13 * 4:
+                k = a % 13
+                Pattern.draw_DIE(k, bullet_xpos, bullet_ypos, bullet_speed)
+                if k == 7:
+                    for n in range(180):
+                        if n == 0 :
+                           Pattern.fire(bullet_xpos, bullet_ypos, 0, 2 * n, bullet_speed, 0.25)
 
                 a += 1
 
@@ -350,6 +342,27 @@ class Pattern:
 
     def get_bb(self):
         return self.radius, self.x, self.y
+
+
+    def draw_DIE(self, k, bullet_xpos, bullet_ypos, bullet_speed):
+        if k == 0 or k == 4:
+            for n in range(10):
+                self.fire(bullet_xpos, bullet_ypos, 0, -115 + n, bullet_speed, 0)  # D
+                self.fire(bullet_xpos, bullet_ypos, 0, -90 + n / 2, bullet_speed, 0)  # I
+                self.fire(bullet_xpos, bullet_ypos, 0, -90 - n / 2, bullet_speed, 0)  # I
+
+        if 1 <= k and k <= 3:
+            self.fire(bullet_xpos, bullet_ypos, 0, -115 + 12, bullet_speed, 0)  # D
+
+        if k == 0 or k == 2 or k == 4:
+            for n in range(10):
+                self.fire(bullet_xpos, bullet_ypos, 0, -75 + n, bullet_speed, 0)  # E
+
+        if k < 5:
+            self.fire(bullet_xpos, bullet_ypos, 0, -115, bullet_speed, 0)  # D
+            self.fire(bullet_xpos, bullet_ypos, 0, -90, bullet_speed, 0)  # I
+            self.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0)  # E
+            pass
 
 
 #for n in range(bullet_amount):
