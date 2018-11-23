@@ -74,22 +74,18 @@ class Pattern1:
                 Pattern.fireSound.play(1)
 
                 #bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
+                Pattern.fire(300, 800, 0, -0.5 * PI, +1, 0)
 
-                Pattern.fire(300, 400, 0, -0.5 * PI, +1, +0.005 * PI)
-                Pattern.fire(300, 400, 0, +0.5 * PI, +1, +0.005 * PI)
-                Pattern.fire(100, 600, 0, -0.5 * PI, +1, +0.005 * PI)
-                Pattern.fire(100, 600, 0, +0.5 * PI, +1, +0.005 * PI)
-                Pattern.fire(100, 600, 0, -1.0 * PI, +1, +0.005 * PI)
-                Pattern.fire(100, 600, 0, +0.0 * PI, +1, +0.005 * PI)
-                Pattern.fire(500, 600, 0, -0.5 * PI, +1, -0.005 * PI)
-                Pattern.fire(500, 600, 0, +0.5 * PI, +1, -0.005 * PI)
-                Pattern.fire(500, 600, 0, -1.0 * PI, +1, -0.005 * PI)
-                Pattern.fire(500, 600, 0, +0.0 * PI, +1, -0.005 * PI)
-                Pattern.fire(100, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                Pattern.fire(200, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                Pattern.fire(300, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                Pattern.fire(400, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
-                Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+
+                #Pattern.fire(500, 600, 0, -0.5 * PI, +1, -0.005 * PI)
+                #Pattern.fire(500, 600, 0, +0.5 * PI, +1, -0.005 * PI)
+                #Pattern.fire(500, 600, 0, -1.0 * PI, +1, -0.005 * PI)
+                #Pattern.fire(500, 600, 0, +0.0 * PI, +1, -0.005 * PI)
+                #Pattern.fire(100, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                #Pattern.fire(200, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                #Pattern.fire(300, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                #Pattern.fire(400, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
+                #Pattern.fire(500, 1000 + 25, 0, -0.5 * PI, 3, 0.00)
                 #Pattern.fire(0 - 25, 500 - 30 * a, 0, 0 * PI, 3, 0.00)
             else:
                 #Pattern.add_event(PATTERN2)
@@ -127,6 +123,10 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             if a < 10:
+
+                Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
+
+
 
                 Pattern.fire(300, 500, 0, 0.00 * PI, 1.0, 0.0)
                 Pattern.fire(300, 500, 0, 0.50 * PI, 1.0, 0.0)
