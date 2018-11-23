@@ -66,15 +66,17 @@ class Pattern1:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
-        if Pattern.add_time >= 0.5:
+        if Pattern.add_time >= 1:
             Pattern.add_time = 0
             if a < 20:
                 a += 1
 
                 Pattern.fireSound.play(1)
 
-                #bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
-                Pattern.fire(300, 800, 0, -0.5 * PI, +1, 0)
+
+                #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+                for n in range(32):
+                    Pattern.fire(300, 800, 0, 5 * n - 180, +1, 0)
 
 
                 #Pattern.fire(500, 600, 0, -0.5 * PI, +1, -0.005 * PI)
@@ -210,9 +212,9 @@ class Pattern:
     def add_bullet(self):
         game_world.add_object(bullet, 2)
 
-    def fire(self, x = 300, y = 500, radius = 0, radian = 0.0, delta_radius = 0.0, delta_radian = 0.0):
+    def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0):
 
-        bullet = Bullet(x, y, radius, radian, delta_radius, delta_radian)
+        bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
         game_world.add_object(bullet, 2)
 
     def get_bb(self):

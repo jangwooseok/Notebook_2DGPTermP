@@ -7,10 +7,10 @@ PI = 3.141592
 class Bullet:
     image = None
 
-    def __init__(self, x = 400, y = 800, radius = 0, radian = -0.5 * PI, delta_radius = 1, delta_radian = 0.01):
+    def __init__(self, x = 400, y = 800, radius = 0, degree = -90, delta_radius = 1, delta_degree = 0):
         self.radius = radius
-        self.radian = radian
-        self.delta_radius, self.delta_radian = delta_radius, delta_radian
+        self.radian = degree/180 * PI
+        self.delta_radius, self.delta_radian = delta_radius, delta_degree/180 * PI
         if Bullet.image == None:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
         self.x, self.y = x, y
