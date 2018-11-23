@@ -122,17 +122,24 @@ class Pattern2:
         global start_time, a
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
+
+        bullet_speed = 2.0
+        bullet_ypos = 800
+        bullet_xpos = 300
+
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
             bullet_amount = 5
-            for n in range(bullet_amount):
-                seprate = 50
-                Pattern.fire(300 - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
-                Pattern.fire(300 - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
-                Pattern.fire(400, 800 - seprate * n, 0, -90, 1, 0)
-                Pattern.fire(200, 800 - seprate * n, 0, -90, 1, 0)
             if a < 20:
+                k = a % 5
+                if k == 0:
+                    for n in range(bullet_amount):
+                        seprate = 50
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, 600, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, 800, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos + seprate * 2, 800 - seprate * n, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2, 800 - seprate * n, 0, -90, 1, 0)
 
 
                 a += 1
@@ -309,7 +316,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern3
+        self.cur_state = Pattern2
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -350,6 +357,9 @@ class Pattern:
 
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
         game_world.add_object(bullet, 2)
+    def remove_bullet(self):
+        game_world.remove_object(bullet)
+        pass
 
     def get_bb(self):
         return self.radius, self.x, self.y
