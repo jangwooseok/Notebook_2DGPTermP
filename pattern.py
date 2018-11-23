@@ -176,7 +176,7 @@ class Pattern3:
 
             bullet_amount = 13
             bullet_speed = 1.5
-            bullet_ypos = 1200
+            bullet_ypos = 600
             bullet_move_down = -90
 
 
@@ -193,10 +193,10 @@ class Pattern3:
 
                 elif 5 <= a and a < 9:
                     for n in range(bullet_amount):
-                        if n != 6 and n != 7 and n != 10 and n != 11:
+                        if n != 6 and n != 7 :
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
 
-                elif a == 11 and a == 10:
+                elif a == 11 or a == 10:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 9 and n != 10:
                             Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
