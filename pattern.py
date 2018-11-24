@@ -93,7 +93,7 @@ class Pattern1:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, -0.1)
                 a += 1
             else:
-                Pattern.add_event(PATTERN3)
+                Pattern.add_event(PATTERN2)
                 pass
         pass
     def draw(Pattern):
@@ -141,7 +141,7 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 25:
+            if a < 14:
                 k = a % 15 + 5
 
 
@@ -352,7 +352,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Pattern1
         self.cur_state.enter(self, None)
 
         self.add_time = 0
