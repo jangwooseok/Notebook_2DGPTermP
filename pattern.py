@@ -135,17 +135,23 @@ class Pattern2:
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
             bullet_amount = 5
             if a < 20:
-                k = a % 5
+                k = a % 7
+
+
                 if k == 0:
                     #추가중
                     #Pattern.want_remove_bullet = True
                     for n in range(bullet_amount):
                         seprate = 50
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - 200, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * n, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * n, 0, -90, 1, 0)
-
+                        # 가로
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos + seprate * 2, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - seprate * 2, 0, -90, 1, 0)
+                        # 세로
+                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * 2 + seprate * n, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * 2 + seprate * n, 0, -90, 1, 0)
+                if a > 4:
+                    game_world.remove_object_in_layer(2)
+                    print('지으ㅏ져러')
 
                 a += 1
             else:

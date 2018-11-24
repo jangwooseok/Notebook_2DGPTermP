@@ -13,7 +13,12 @@ def remove_object(o):
         if o in objects[i]:
             objects[i].remove(o)
             del o
+            break
 
+def remove_object_in_layer(layer):
+    while len(objects[layer]) > 0:
+        data_deleted = objects[layer].pop()
+        del data_deleted
 
 def clear():
     for o in all_objects():
