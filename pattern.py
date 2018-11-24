@@ -93,7 +93,7 @@ class Pattern1:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, -0.1)
                 a += 1
             else:
-                Pattern.add_event(PATTERN2)
+                Pattern.add_event(PATTERN3)
                 pass
         pass
     def draw(Pattern):
@@ -108,9 +108,13 @@ class Pattern2:
     def enter(Pattern, event):
         global bullet
         global a, start_time
+        global safeZoneX, safeZoneY
         Pattern.add_time = 0
         Pattern.current_time = get_time()
         print('22222222222222222')
+
+        safeZoneX = [0,0,0]
+        safeZoneY = [0,0,0]
 
         a = 0
         start_time = get_time()
@@ -124,6 +128,7 @@ class Pattern2:
     def do(Pattern):
         global bullet
         global start_time, a
+        global safeZoneX, safeZoneY
         Pattern.add_time += get_time() - Pattern.current_time
         Pattern.current_time = get_time()
 
@@ -131,36 +136,46 @@ class Pattern2:
         bullet_ypos = 800
         bullet_xpos = 300
 
-        safeZoneX = [0,0,0]
-        safeZoneY = [0,0,0]
+
 
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 20:
-                k = a % 7
+            if a < 25:
+                k = a % 15 + 5
 
 
-                if a == 1:
+                if a == 5 :
                     #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
                     for h in range(5):
                         for w in range(3):
                             Pattern.draw_empty_square(200 * w + 100, 200 * h +100, bullet_speed)
                         #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
                     for n in range(3):
-                        safeZoneX[n] = random.randint(1, 3)
+                        safeZoneX[n] = random.randint(0, 2)
                     for n in range(3):
-                        safeZoneY[n] = random.randint(1, 6)
+                        safeZoneY[n] = random.randint(0, 5)
 
                     for n in range(3):
-                        Pattern.fire(200 * safeZoneX[n] - 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0)  # I
-                    #print(safeZoneX[0], safeZoneX[1], safeZoneY[0], safeZoneY[1], safeZoneY[2])
-                elif a == 11:
-                    game_world.remove_object_in_layer(2)
+                        Pattern.fire(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0)
+                    print(safeZoneX[0], safeZoneX[1], safeZoneX[2], safeZoneY[0], safeZoneY[1], safeZoneY[2])
+
                 elif a == 12:
+                    game_world.remove_object_in_layer(2)
+
+                elif a == 11:
+                    bullet_amount = 5
+                    seprate = 35
+                    print(safeZoneX[0], safeZoneX[1], safeZoneX[2], safeZoneY[0], safeZoneY[1], safeZoneY[2])
+
                     for h in range(5):
                         for w in range(3):
-                            Pattern.draw_fill_square(200 * w + 100, 200 * h + 100, bullet_speed)
+                            if not(w == safeZoneX[0] and h == safeZoneY[0]) and not(w == safeZoneX[1] and h == safeZoneY[1]) and not(w == safeZoneX[2] and h == safeZoneY[2]):
+                                bullet_xpos = w * 200 + 100
+                                bullet_ypos = h * 200 + 100
+                                Pattern.draw_fill_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
+
+
 
                 a += 1
             else:
@@ -445,29 +460,17 @@ class Pattern:
                 self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
                 self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
 
-    def draw_fill_square(self, bullet_xpos, bullet_ypos, bullet_speed):
-        # 사각형 크기 bullet_amount X seprate
-        bullet_amount = 11
-        seprate = 20
-        temp = 250
+    def draw_fill_square(self, bullet_xpos, bullet_ypos, bullet_amount, seprate):
+
+        #bullet_amount = 5
+        #seprate = 35
 
         for n in range(bullet_amount):
             for k in range(bullet_amount):
-                width_x = bullet_xpos - seprate * 5 + seprate * n
-                width_y = bullet_ypos - seprate * 5 + seprate * n
-                width_y1 = bullet_ypos + seprate * 5
-                width_y2 = bullet_ypos - seprate * 5
-                height_y = bullet_ypos - seprate * 5 + seprate * k
-                height_x = bullet_xpos - seprate * 5 + seprate * n
-                height_x1 = bullet_xpos + seprate * 5
-                height_x2 = bullet_xpos - seprate * 5
+                width_x = bullet_xpos - seprate * 2 + seprate * n
+                height_y = bullet_ypos - seprate * 2 + seprate * k
 
-                self.fire(width_x, height_y, 0, -90, bullet_speed, 0)
-
-                #self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
-                #self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
-                #self.fire(height_x, height_y, 0, -90, bullet_speed, 0)
-                #self.fire(height_x, height_y, 0, -90, bullet_speed, 0)
+                self.fire(width_x, height_y, 0, -90, 0, 0)
 
 
 #for n in range(bullet_amount):
