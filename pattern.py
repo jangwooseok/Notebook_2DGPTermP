@@ -367,18 +367,29 @@ class Pattern5:
         bullet_xpos = 300
 
         bullet_amount = 11
-        seprate = 20
+        seprate = 30
 
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
             if a < 20:
-                if a == 0:
-                    bullet_amount = 11
-                    seprate = 20
-                    Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_speed)
 
-                    pass
+                bullet_amount = 11
+
+                if a == 0:
+                    seprate = 60
+                if a == 1:
+                    seprate = 50
+                if a == 2:
+                    seprate = 40
+                if a == 3:
+                    seprate = 35
+                if a == 4:
+                    seprate = 30
+                if a < 5:
+                    game_world.remove_object_in_layer(2)
+                Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
+
                 a += 1
             else:
                 Pattern.add_event(PATTERN1)
@@ -389,10 +400,10 @@ class Pattern5:
         pass
 
 next_state_table = {
-    Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3 , PATTERN4: Pattern4, PATTERN5: Pattern5}
+    Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
+    Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
+    Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
+    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5}
 }
 
 
@@ -409,7 +420,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern1
+        self.cur_state = Pattern5
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -484,9 +495,10 @@ class Pattern:
             pass
 
     # 사각형 만드는 함수 만들려고 하던 중임 - 미완
-    def draw_empty_square(self, bullet_xpos, bullet_ypos, bullet_amount, seprate):
+    def draw_empty_square(self, bullet_xpos, bullet_ypos, bullet_speed):
         # 사각형 크기 bullet_amount X seprate
-
+        bullet_amount = 11
+        seprate = 20
         #bullet_amount = 5
         #seprate = 50
 
@@ -498,17 +510,17 @@ class Pattern:
             height_y = bullet_ypos - seprate * 5 + seprate * n
             height_x1 = bullet_xpos + seprate * 5
             height_x2 = bullet_xpos - seprate * 5
+            if n != 5 and n != 4 and n != 6:
+                # 가로
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
+                self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
+                # 세로
+                self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
+                self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
 
-            # 가로
-            self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
-            self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
-            # 세로
-            self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
-            self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
-
-    def draw_pattern5_empty_square(self, bullet_xpos, bullet_ypos, bullet_speed):
+    def draw_pattern5_empty_square(self, bullet_xpos, bullet_ypos, bullet_amount, seprate):
         # 사각형 크기 bullet_amount X seprate
-
+        bullet_speed = 0
         # bullet_amount = 5
         # seprate = 50
         temp = 250
@@ -520,13 +532,12 @@ class Pattern:
             height_y = bullet_ypos - seprate * 5 + seprate * n
             height_x1 = bullet_xpos + seprate * 5
             height_x2 = bullet_xpos - seprate * 5
-            if n != 5 and n != 4 and n != 6:
-                # 가로
-                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
-                self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
-                # 세로
-                self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
-                self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
+            # 가로
+            self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
+            self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
+            # 세로
+            self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
+            self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
 
     def draw_fill_square(self, bullet_xpos, bullet_ypos, bullet_amount, seprate):
 
