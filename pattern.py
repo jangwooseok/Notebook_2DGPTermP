@@ -138,13 +138,13 @@ class Pattern2:
                 k = a % 5
                 if k == 0:
                     #추가중
-                    Pattern.want_remove()
+                    #Pattern.want_remove_bullet = True
                     for n in range(bullet_amount):
                         seprate = 50
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - 200, 0, -90, 0, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos, 0, -90, 0, 0)
-                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * n, 0, -90, 0, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * n, 0, -90, 0, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - 200, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * n, 0, -90, 1, 0)
+                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * n, 0, -90, 1, 0)
 
 
                 a += 1
@@ -335,6 +335,8 @@ class Pattern:
         self.fireSound = load_wav('pickup.wav')
         self.fireSound.set_volume(32)
 
+        self.want_remove_bullet = False
+
     def add_event(self, event):
         self.event_que.insert(0, event)
 
@@ -365,7 +367,9 @@ class Pattern:
         game_world.add_object(bullet, 2)
 
     def want_remove(self):
-        return True
+        if self.want_remove_bullet == True:
+            return True
+        return False
         pass
 
     def get_bb(self):

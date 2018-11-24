@@ -47,10 +47,10 @@ def collide(a, b):
 
 # 추가중
 def is_remove():
-    if Pattern.want_remove() == True:
-        return True
-    return False
-
+    #if Pattern.want_remove() == True:
+    #    return True
+    #return False
+    pass
 
 
 def handle_events():
