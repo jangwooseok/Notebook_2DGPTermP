@@ -45,13 +45,6 @@ def collide(a, b):
         return True
     return False
 
-# 추가중
-def is_remove():
-    #if Pattern.want_remove() == True:
-    #    return True
-    #return False
-    pass
-
 
 def handle_events():
     events = get_events()

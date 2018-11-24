@@ -20,7 +20,6 @@ class Bullet:
         if Bullet.image == None:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
         self.x, self.y = x, y
-        self.is_remove = False
 
         self.bulletX, self.bulletY = 0, 0
 
@@ -32,12 +31,11 @@ class Bullet:
         return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
-        self.is_remove = main_state.is_remove()
         self.radius += self.delta_radius
         self.bulletX = self.x + self.radius * math.cos(self.radian)
         self.bulletY = self.y + self.radius * math.sin(self.radian)
 
         self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2800
 
-        if self.radius > 1200 or self.radius < 0 :
+        if self.radius > 800 or self.radius < 0 :
             game_world.remove_object(self)

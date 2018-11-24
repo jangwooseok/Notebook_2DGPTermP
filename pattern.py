@@ -40,6 +40,7 @@ key_event_table = {
 #boy = main_state.get_boy()
 
 
+
 # States
 class Pattern1:
 
@@ -92,7 +93,7 @@ class Pattern1:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, -0.1)
                 a += 1
             else:
-                Pattern.add_event(PATTERN2)
+                Pattern.add_event(PATTERN3)
                 pass
         pass
     def draw(Pattern):
@@ -130,6 +131,9 @@ class Pattern2:
         bullet_ypos = 800
         bullet_xpos = 300
 
+        safeZoneX = [0,0]
+        safeZoneY = [0,0,0]
+
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
@@ -137,13 +141,21 @@ class Pattern2:
                 k = a % 7
 
 
-                if k == 0:
+                if a == 5:
                     #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
-                    Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
-
-                if a > 4:
+                    for h in range(4):
+                        for w in range(3):
+                            Pattern.draw_empty_square(200 * w + 100, 200 * h + 200, 0)
+                        #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
+                elif a == 1:
+                    for n in range(2):
+                        safeZoneX[n] = random.randrange(2)
+                    for n in range(3):
+                        safeZoneY[n] = random.randrange(0, 3)
+                    #self.fire(bullet_xpos, bullet_ypos, 0, -90 - n / 2, bullet_speed, 0)  # I
+                    #print(safeZoneX[0], safeZoneX[1], safeZoneY[0], safeZoneY[1], safeZoneY[2])
+                elif a == 19:
                     game_world.remove_object_in_layer(2)
-                    print('지으ㅏ져러')
 
                 a += 1
             else:
@@ -186,7 +198,7 @@ class Pattern3:
 
             bullet_amount = 13
             bullet_speed = 1.5
-            bullet_ypos = 600
+            bullet_ypos = 800
             bullet_move_down = -90
 
 
@@ -320,7 +332,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Pattern3
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -395,7 +407,7 @@ class Pattern:
             pass
 
     # 사각형 만드는 함수 만들려고 하던 중임 - 미완
-    def draw_square(self, bullet_xpos, bullet_ypos, bullet_speed):
+    def draw_empty_square(self, bullet_xpos, bullet_ypos, bullet_speed):
         # 사각형 크기 bullet_amount X seprate
         bullet_amount = 11
         seprate = 20
@@ -406,7 +418,7 @@ class Pattern:
             width_y1 = bullet_ypos + seprate * 5
             width_y2 = bullet_ypos - seprate * 5
 
-            height_y = bullet_xpos - seprate * 5 + seprate * n
+            height_y = bullet_ypos - seprate * 5 + seprate * n
             height_x1 = bullet_xpos + seprate * 5
             height_x2 = bullet_xpos - seprate * 5
 
@@ -415,8 +427,31 @@ class Pattern:
                 self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
                 self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
                 # 세로
-                self.fire(height_x1, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
-                self.fire(height_x2, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
+                self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
+                self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
+
+    def draw_fill_square(self, bullet_xpos, bullet_ypos, bullet_speed):
+        # 사각형 크기 bullet_amount X seprate
+        bullet_amount = 11
+        seprate = 20
+        temp = 250
+
+        for n in range(bullet_amount):
+            width_x = bullet_xpos - seprate * 5 + seprate * n
+            width_y1 = bullet_ypos + seprate * 5
+            width_y2 = bullet_ypos - seprate * 5
+
+            height_y = bullet_ypos - seprate * 5 + seprate * n
+            height_x1 = bullet_xpos + seprate * 5
+            height_x2 = bullet_xpos - seprate * 5
+
+            if n != 5 and n != 4 and n != 6:
+                # 가로
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
+                self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
+                # 세로
+                self.fire(height_x1, height_y, 0, -90, bullet_speed, 0)
+                self.fire(height_x2, height_y, 0, -90, bullet_speed, 0)
 
 
 #for n in range(bullet_amount):
