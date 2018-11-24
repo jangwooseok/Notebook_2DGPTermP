@@ -93,7 +93,7 @@ class Pattern1:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, -0.1)
                 a += 1
             else:
-                Pattern.add_event(PATTERN3)
+                Pattern.add_event(PATTERN2)
                 pass
         pass
     def draw(Pattern):
@@ -296,13 +296,13 @@ class Pattern4:
                 k = a % 13
                 Pattern.draw_DIE(k, bullet_xpos, bullet_ypos, bullet_speed)
                 if k == 7:
-                    for n in range(40):
-                        for i in range(6):
-                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 90 * i + n, bullet_speed, 0.5)
+                    for n in range(15):
+                        for i in range(5):
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 75 * i + 3 * n, bullet_speed, -0.4)
                 if k == 10:
-                    for n in range(40):
+                    for n in range(15):
                         for i in range(6):
-                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + n, bullet_speed, 0.7)
+                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + 3 * n, bullet_speed, 0.7)
 
                 a += 1
 
@@ -332,7 +332,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern3
+        self.cur_state = Pattern4
         self.cur_state.enter(self, None)
 
         self.add_time = 0
