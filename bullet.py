@@ -3,7 +3,7 @@ import game_world
 import main_state
 
 #안된다 이유를 모르겠다
-from pattern import Pattern
+#from pattern import Pattern
 
 
 PI = 3.141592
@@ -32,12 +32,12 @@ class Bullet:
         return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
-        #self.is_remove = main_state.is_remove(Pattern1)
+        self.is_remove = main_state.is_remove()
         self.radius += self.delta_radius
         self.bulletX = self.x + self.radius * math.cos(self.radian)
         self.bulletY = self.y + self.radius * math.sin(self.radian)
 
         self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2800
 
-        if self.radius > 1200 or self.radius < 0 or self.is_remove == True:
+        if self.radius > 1200 or self.radius < 0 or self.is_remove() == True:
             game_world.remove_object(self)

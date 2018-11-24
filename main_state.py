@@ -46,8 +46,8 @@ def collide(a, b):
     return False
 
 # 추가중
-def is_remove(a):
-    if a.want_remove() == True:
+def is_remove():
+    if Pattern.want_remove() == True:
         return True
     return False
 

@@ -98,6 +98,9 @@ class Pattern1:
     def draw(Pattern):
         pass
 
+
+
+# 유비트처럼 테두리
 class Pattern2:
 
     @staticmethod
@@ -389,6 +392,7 @@ class Pattern:
             self.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0)  # E
             pass
 
+    # 사각형 만드는 함수 만들려고 하던 중임 - 미완
     def draw_square(self, k, bullet_xpos, bullet_ypos, bullet_speed):
         for n in range(bullet_amount):
             seprate = 50
