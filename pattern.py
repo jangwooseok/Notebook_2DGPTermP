@@ -133,22 +133,14 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            bullet_amount = 5
             if a < 20:
                 k = a % 7
 
 
                 if k == 0:
-                    #추가중
-                    #Pattern.want_remove_bullet = True
-                    for n in range(bullet_amount):
-                        seprate = 50
-                        # 가로
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos + seprate * 2, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2 + seprate * n, bullet_ypos - seprate * 2, 0, -90, 1, 0)
-                        # 세로
-                        Pattern.fire(bullet_xpos + seprate * 2, bullet_ypos - seprate * 2 + seprate * n, 0, -90, 1, 0)
-                        Pattern.fire(bullet_xpos - seprate * 2, bullet_ypos - seprate * 2 + seprate * n, 0, -90, 1, 0)
+                    #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
+                    Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
+
                 if a > 4:
                     game_world.remove_object_in_layer(2)
                     print('지으ㅏ져러')
@@ -403,13 +395,25 @@ class Pattern:
             pass
 
     # 사각형 만드는 함수 만들려고 하던 중임 - 미완
-    def draw_square(self, k, bullet_xpos, bullet_ypos, bullet_speed):
+    def draw_square(self, bullet_xpos, bullet_ypos, bullet_speed):
+        # 사각형 크기 bullet_amount X seprate
+        bullet_amount = 11
+        seprate = 20
+        temp = 250
+
         for n in range(bullet_amount):
-            seprate = 50
-            self.fire(bullet_xpos - seprate * 2 + seprate * n, 600, 0, -90, 0, 0)
-            self.fire(bullet_xpos - seprate * 2 + seprate * n, 800, 0, -90, 0, 0)
-            self.fire(bullet_xpos + seprate * 2, 800 - seprate * n, 0, -90, 0, 0)
-            self.fire(bullet_xpos - seprate * 2, 800 - seprate * n, 0, -90, 0, 0)
+            width_x = bullet_xpos - seprate * 5 + seprate * n
+            height_x1 = bullet_xpos + seprate * 5
+            height_x2 = bullet_xpos - seprate * 5
+
+            if n != 5 and n != 4 and n != 6:
+                # 가로
+                self.fire(width_x, bullet_ypos + seprate * 5, 0, -90, bullet_speed, 0)
+                self.fire(width_x, bullet_ypos - seprate * 5, 0, -90, bullet_speed, 0)
+                # 세로
+                self.fire(height_x1, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
+                self.fire(height_x2, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
+
 
 #for n in range(bullet_amount):
 #    seprate = 50
