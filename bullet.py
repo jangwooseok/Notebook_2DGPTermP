@@ -10,22 +10,28 @@ PI = 3.141592
 
 COLLIDE_SIZE = 23
 
+TYPE_BULLET = 0
+TYPE_BLOCK = 1
+
 class Bullet:
     image = None
 
-    def __init__(self, x = 400, y = 800, radius = 0, degree = -90, delta_radius = 1, delta_degree = 0):
+    def __init__(self, x = 400, y = 800, radius = 0, degree = -90, delta_radius = 1, delta_degree = 0, type = TYPE_BULLET): # 1이면 블럭 모양 출력
         self.radius = radius
         self.radian = degree/180 * PI
         self.delta_radius, self.delta_radian = delta_radius, delta_degree/180 * PI
-        if Bullet.image == None:
+        if Bullet.image == None and type == TYPE_BULLET:
             Bullet.image = load_image('WhiteBloodCell_50x50.png')
+        elif Bullet.image == None and type == TYPE_BLOCK:
+            Bullet.image = load_image('block_50x50.png')
+
         self.x, self.y = x, y
 
         self.bulletX, self.bulletY = 0, 0
 
     def draw(self):
         #self.image.draw(self.x, self.y)
-        self.image.draw( self.bulletX, self.bulletY)
+        self.image.draw(self.bulletX, self.bulletY)
 
     def get_bb(self):
         return COLLIDE_SIZE, self.bulletX, self.bulletY
