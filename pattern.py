@@ -403,13 +403,17 @@ class Pattern:
 
         for n in range(bullet_amount):
             width_x = bullet_xpos - seprate * 5 + seprate * n
+            width_y1 = bullet_ypos + seprate * 5
+            width_y2 = bullet_ypos - seprate * 5
+
+            height_y = bullet_xpos - seprate * 5 + seprate * n
             height_x1 = bullet_xpos + seprate * 5
             height_x2 = bullet_xpos - seprate * 5
 
             if n != 5 and n != 4 and n != 6:
                 # 가로
-                self.fire(width_x, bullet_ypos + seprate * 5, 0, -90, bullet_speed, 0)
-                self.fire(width_x, bullet_ypos - seprate * 5, 0, -90, bullet_speed, 0)
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0)
+                self.fire(width_x, width_y2, 0, -90, bullet_speed, 0)
                 # 세로
                 self.fire(height_x1, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
                 self.fire(height_x2, bullet_ypos - seprate * 5 + seprate * n, 0, -90, bullet_speed, 0)
