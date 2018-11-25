@@ -326,7 +326,7 @@ class Pattern4:
                 a += 1
 
             else :
-                Pattern.add_event(PATTERN1)
+                Pattern.add_event(PATTERN5)
         pass
     def draw(Pattern):
         pass
@@ -367,12 +367,17 @@ class Pattern5:
         bullet_xpos = 300
 
         bullet_amount = 11
-        seprate = 30
+        seprate = 3
+
+        right = 0
+        up = 90
+        left = 180
+        down = 270
 
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 20:
+            if a < 70:
 
                 bullet_amount = 11
 
@@ -391,20 +396,62 @@ class Pattern5:
                     Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
 
                 if a == 5:
-                    bullet_ypos = 600
-                    bullet_amount = 13
-                    seprate = 50
-                    for n in range(bullet_amount):
-                        if n != 10 or n!= 10-1 or n != 10 + 1:
-                            width_x = bullet_xpos - seprate * 6 + seprate * n
-                            height_y = 600
-                            Pattern.fire(width_x, height_y, 0, -90, 1, 0)
-                if a == 6:
-                    #pattern5_left(self, move_speed, safe):
-                    bullet_amount = 13
-                    seprate = 50
-                    Pattern.pattern5_line(180, 2.0, 5)
+                    Pattern.pattern5_line(down, 7.3, 6, 7)
 
+                if a == 7:
+                    #pattern5_left(self, move_speed, safe): #safe = 4~8
+                    Pattern.pattern5_line(left, 7.3, 4, 5)
+                    Pattern.pattern5_line(left, 8.0, 4, 5)
+                if a == 9:
+                    Pattern.pattern5_line(left, 7.3, 4, 5)
+                if a == 10:
+                    Pattern.pattern5_line(left, 7.3, 4, 5)
+                    Pattern.pattern5_line(right, 2.0, 6, 7)
+                if a == 11:
+                    Pattern.pattern5_line(left, 15.0, 4, 5)
+                if a == 13:
+                    Pattern.pattern5_line(up, 7.7, 4, 5)
+                if 14 <= a and a <= 20:
+                    Pattern.pattern5_line(right, 2.0, 4, 5)
+                if a == 17:
+                    Pattern.pattern5_line(down, 7.7, 4, 5)
+                if a == 18:
+                    Pattern.pattern5_line(up, 3.7, 4, 5)
+                    Pattern.pattern5_line(up, 3.0, 5, 6)
+                    Pattern.pattern5_line(up, 2.3, 6, 7)
+                    Pattern.pattern5_line(up, 1.4, 7, 8)
+                if a == 24:
+                    Pattern.pattern5_line(down, 2.4, 7, 8)
+                    Pattern.pattern5_line(right, 2.4, 4, 5)
+                if a == 25:
+                    Pattern.pattern5_line(down, 2.2, 6, 7)
+                    Pattern.pattern5_line(right, 2.2, 5, 6)
+                if a == 26:
+                    Pattern.pattern5_line(down, 2.0, 5, 6)
+                    Pattern.pattern5_line(right, 2.0, 6, 7)
+                if a == 28:
+                    Pattern.pattern5_line(left, 6.0, 7, 8)
+                    Pattern.pattern5_line(up, 6.0, 4, 5)
+                if a == 33:
+                    Pattern.pattern5_line(up, 1.7, 6, 7)
+                if a == 34:
+                    Pattern.pattern5_line(down, 1.7, 6, 7)
+                if 30 <= a and a <= 35:
+                    Pattern.pattern5_line(left, 15.0, 7, 8)
+                    Pattern.pattern5_line(up, 15.0, 4, 5)
+                if a == 36:
+                    Pattern.pattern5_line(down, 7.0, 5, 6)
+                    Pattern.pattern5_line(up, 7.0, 5, 6)
+                if a == 41 or a == 43 or a == 45:
+                    Pattern.pattern5_line(down, 1.5, 5, 4)
+                    Pattern.pattern5_line(up, 1.5, 7, 8)
+                if a == 48:
+                    Pattern.pattern5_line(down, 0.3, 0, 11)
+                    Pattern.pattern5_line(up, 0.3, 0, 11)
+                    Pattern.pattern5_line(left, 0.3, 0, 21)
+                    Pattern.pattern5_line(right, 0.3, 0, 21)
+                if a == 64:
+                    game_world.remove_object_in_layer(2)
 
 
                 a += 1
@@ -568,32 +615,36 @@ class Pattern:
 
                 self.fire(width_x, height_y, 0, -90, 0, 0)
 
-    def pattern5_line(self, diraction, move_speed, safe):
+    def pattern5_line(self, diraction, move_speed, safe1, safe2): #safe = 4~8
         bullet_ypos = 500
         bullet_xpos = 300
-        move_speed = 2.00
 
-        if diraction == -90 or diraction == 90:
+        right = 0
+        up = 90
+        left = 180
+        down = 270
+
+        if diraction == down or diraction == up:
             bullet_amount = 13
             seprate = 50
             for n in range(bullet_amount):
-                if n != safe or n != safe - 1 or n != safe + 1:
+                if n != safe1 and n != safe2:
                     width_x = bullet_xpos - seprate * 6 + seprate * n
-                    if diraction == -90:
+                    if diraction == down:
                         height_y = 600 - 25
-                    elif diraction == 90:
+                    elif diraction == up:
                         height_y = 0 + 25
                     self.fire(width_x, height_y, 0, diraction, move_speed, 0)
 
-        elif diraction == 0 or diraction == 180:
+        elif diraction == right or diraction == left:
             bullet_amount = 21
             seprate = 50
             for n in range(bullet_amount):
-                if n != safe or n != safe - 1 or n != safe + 1:
+                if n != safe1 and n != safe2:
                     height_y = bullet_ypos - seprate * 10 + seprate * n
-                    if diraction == 0:
+                    if diraction == right:
                         width_x = 0 + 25
-                    elif diraction == 180:
+                    elif diraction == left:
                         width_x = 600 - 25
                     self.fire(width_x, height_y, 0, diraction, move_speed, 0)
 
