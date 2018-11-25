@@ -58,7 +58,6 @@ class Pattern1:
         a = 0
         start_time = get_time()
 
-        print('111111111111')
 
         pass
 
@@ -81,16 +80,15 @@ class Pattern1:
             Pattern.add_time = 0
 
 
-            if a < 22 + 33:
-                Pattern.fireSound.play(1)
+            if a < 12:
                 #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-                if a < 10:
+                if a < 5:
                     for n in range(30):
                         if a % 2 == 0:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n, bullet_speed, 0)
                         else:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n + 3, bullet_speed, 0)
-                else:
+                elif a < 12:
                     for n in range(30):
                         if a % 2 == 0:
                             Pattern.fire(bullet_xpos, bullet_ypos, 0, -6 * n, bullet_speed, 0.1)
@@ -115,7 +113,6 @@ class Pattern2:
         global safeZoneX, safeZoneY
         Pattern.add_time = 0
         Pattern.current_time = get_time()
-        print('22222222222222222')
 
         safeZoneX = [0,0,0]
         safeZoneY = [0,0,0]
@@ -145,7 +142,7 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 35:
+            if a < 32:
                 k = a % 15
 
 
@@ -196,7 +193,6 @@ class Pattern3:
         Pattern.add_time = 0
         Pattern.current_time = get_time()
 
-        print('33333333333333333')
         a = 0
         start_time = get_time()
         pass
@@ -287,7 +283,6 @@ class Pattern4:
         Pattern.add_time = 0
         Pattern.current_time = get_time()
 
-        print('4444444444444')
         a = 0
         start_time = get_time()
         pass
@@ -326,7 +321,6 @@ class Pattern4:
                                 Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + 3 * n, bullet_speed, 0.7)
 
                 a += 1
-                print(a)
             else :
                 Pattern.add_event(PATTERN5)
         pass
@@ -343,7 +337,6 @@ class Pattern5:
         global safeZoneX, safeZoneY
         Pattern.add_time = 0
         Pattern.current_time = get_time()
-        print('5555555555555')
 
         safeZoneX = [0,0,0]
         safeZoneY = [0,0,0]
@@ -445,8 +438,8 @@ class Pattern5:
                     Pattern.pattern5_line(down, 7.0, 5, 6)
                     Pattern.pattern5_line(up, 7.0, 5, 6)
                 if a == 41 or a == 43 or a == 45:
-                    Pattern.pattern5_line(down, 1.5, 5, 4)
-                    Pattern.pattern5_line(up, 1.5, 7, 8)
+                    Pattern.pattern5_line(down, 2.0, 5, 4)
+                    Pattern.pattern5_line(up, 2.0, 7, 8)
                 if a == 48:
                     Pattern.pattern5_line(down, 0.3, 0, 11)
                     Pattern.pattern5_line(up, 0.3, 0, 11)
@@ -487,18 +480,15 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern1
+        self.cur_state = Pattern5
         self.cur_state.enter(self, None)
 
         self.add_time = 0
         self.current_time = get_time()
 
-        self.bgm = load_music('toby_fox_UNDERTALE_Soundtrack_100_MEGALOVANIA.mp3')
-        self.bgm.set_volume(32)
+        self.bgm = load_music('Undertale OST_ 072 - Song That Might Play When You Fight Sans.mp3')
+        self.bgm.set_volume(64)
         self.bgm.repeat_play()
-
-        self.fireSound = load_wav('pickup.wav')
-        self.fireSound.set_volume(32)
 
         self.want_remove_bullet = False
 
