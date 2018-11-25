@@ -387,20 +387,22 @@ class Pattern5:
                 elif a == 4:
                     seprate = 30
                 if a < 5:
-                    #game_world.remove_object_in_layer(2)
+                    game_world.remove_object_in_layer(2)
                     Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
 
-                if a == 1:
-                    bullet_xpos = 300
+                if a == 5:
                     bullet_ypos = 600
-                    bullet_amount = 21
-                    seprate = 30
+                    bullet_amount = 13
+                    seprate = 50
                     for n in range(bullet_amount):
-                        width_x = bullet_xpos - seprate * 10 + seprate * n
-                        height_y = 600
+                        if n != 10 or n!= 10-1 or n != 10 + 1:
+                            width_x = bullet_xpos - seprate * 6 + seprate * n
+                            height_y = 600
+                            Pattern.fire(width_x, height_y, 0, -90, 1, 0)
+                if a == 6:
+                    #pattern5_left(self, move_speed, safe):
 
-                        Pattern.fire(width_x, height_y, 0, -90, 1, 0)
-                    pass
+                    Pattern.pattern5_line(bullet_xpos, 90, 2.0, 5)
 
 
 
@@ -564,6 +566,22 @@ class Pattern:
                 height_y = bullet_ypos - seprate * 2 + seprate * k
 
                 self.fire(width_x, height_y, 0, -90, 0, 0)
+
+    def pattern5_line(self, bullet_xpos, diraction, move_speed, safe):
+        bullet_ypos = 600
+        bullet_amount = 13
+        seprate = 50
+        move_speed = 0
+        for n in range(bullet_amount):
+            if diraction == -90 or diraction == 90:
+                if n != safe or n != safe - 1 or n != safe + 1:
+                    width_x = bullet_xpos - seprate * 6 + seprate * n
+                    if diraction == -90:
+                        height_y = 600 - 25
+                    elif diraction == 90:
+                        height_y = 0 + 25
+                    self.fire(width_x, height_y, 0, diraction, move_speed, 0)
+
 
 
 #for n in range(bullet_amount):
