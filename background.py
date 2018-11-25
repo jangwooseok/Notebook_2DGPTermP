@@ -4,8 +4,6 @@ from pico2d import *
 
 
 class InfiniteBackground:
-
-
     def __init__(self):
         self.image = load_image('ground_600x3000.png')
         self.canvas_width = get_canvas_width()
@@ -21,10 +19,9 @@ class InfiniteBackground:
 
 
     def draw(self):
-        self.image.clip_draw(0, 0, 600, 3000, 0, 0, 600, 1000)                        # quadrant 3
-
-        #self.image.clip_draw(0, self.y, 600, self.y + self.h1, 0, self.y, 600, self.y + self.h1)                        # quadrant 3
-        #self.image.clip_draw(0, 1000 - self.y, 600, self.h2, 0, 0, 1200, self.h2)                        # quadrant 3
+        #self.image.clip_draw(0, 0, 600, 1000, 300, 500, 600, 1000)                        # quadrant 3
+        self.image.clip_draw(0, self.y, 600, self.y + self.h1, 300, self.y, 600, self.y + self.h1)                        # quadrant 3
+        self.image.clip_draw(0, 1000 - self.y, 600, self.h2, 0, 0, 1200, self.h2)                        # quadrant 3
 
 
 
