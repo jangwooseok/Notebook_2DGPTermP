@@ -142,6 +142,7 @@ class RunState:
                 break
             else:
                 if main_state.collide(bacteria, bullet):
+                    bacteria.bgm.play(1)
                     bacteria.isImmune = True
                     bacteria.collideTime = get_time()
                     print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
@@ -190,6 +191,9 @@ class Bacteria:
         self.isImmune = False
         self.timeAfterCollide, self.collideTime = 0, 0
         #self.isImmune = True
+
+        self.bgm = load_wav('untitled.ogg')
+        self.bgm.set_volume(64)
 
 
 

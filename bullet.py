@@ -28,6 +28,7 @@ class Bullet:
         if Bullet.image_block == None:
             Bullet.image_block = load_image('block_50x50.png')
 
+
         self.x, self.y = x, y
 
         self.bulletX, self.bulletY = 0, 0
