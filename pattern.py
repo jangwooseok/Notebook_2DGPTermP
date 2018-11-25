@@ -401,8 +401,9 @@ class Pattern5:
                             Pattern.fire(width_x, height_y, 0, -90, 1, 0)
                 if a == 6:
                     #pattern5_left(self, move_speed, safe):
-
-                    Pattern.pattern5_line(bullet_xpos, 90, 2.0, 5)
+                    bullet_amount = 13
+                    seprate = 50
+                    Pattern.pattern5_line(180, 2.0, 5)
 
 
 
@@ -567,13 +568,15 @@ class Pattern:
 
                 self.fire(width_x, height_y, 0, -90, 0, 0)
 
-    def pattern5_line(self, bullet_xpos, diraction, move_speed, safe):
-        bullet_ypos = 600
-        bullet_amount = 13
-        seprate = 50
-        move_speed = 0
-        for n in range(bullet_amount):
-            if diraction == -90 or diraction == 90:
+    def pattern5_line(self, diraction, move_speed, safe):
+        bullet_ypos = 500
+        bullet_xpos = 300
+        move_speed = 2.00
+
+        if diraction == -90 or diraction == 90:
+            bullet_amount = 13
+            seprate = 50
+            for n in range(bullet_amount):
                 if n != safe or n != safe - 1 or n != safe + 1:
                     width_x = bullet_xpos - seprate * 6 + seprate * n
                     if diraction == -90:
@@ -582,6 +585,17 @@ class Pattern:
                         height_y = 0 + 25
                     self.fire(width_x, height_y, 0, diraction, move_speed, 0)
 
+        elif diraction == 0 or diraction == 180:
+            bullet_amount = 21
+            seprate = 50
+            for n in range(bullet_amount):
+                if n != safe or n != safe - 1 or n != safe + 1:
+                    height_y = bullet_ypos - seprate * 10 + seprate * n
+                    if diraction == 0:
+                        width_x = 0 + 25
+                    elif diraction == 180:
+                        width_x = 600 - 25
+                    self.fire(width_x, height_y, 0, diraction, move_speed, 0)
 
 
 #for n in range(bullet_amount):
