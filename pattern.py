@@ -28,6 +28,7 @@ ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
 
 
+TYPE_BULLET = 0
 TYPE_BLOCK = 1
 
 
@@ -156,17 +157,15 @@ class Pattern2:
                         #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
-                    for n in range(3):
                         safeZoneY[n] = random.randint(0, 5)
-
-                    for n in range(3):
-                        Pattern.fire(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0)
-                    print(safeZoneX[0], safeZoneX[1], safeZoneX[2], safeZoneY[0], safeZoneY[1], safeZoneY[2])
+                        Pattern.fire(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_BULLET)
 
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
+                    game_world.remove_object_in_layer(2)
+                    game_world.remove_object_in_layer(3)
+
                     bullet_amount = 5
                     seprate = 35
-                    print(safeZoneX[0], safeZoneX[1], safeZoneX[2], safeZoneY[0], safeZoneY[1], safeZoneY[2])
 
                     for h in range(5):
                         for w in range(3):
@@ -174,6 +173,7 @@ class Pattern2:
                                 bullet_xpos = w * 200 + 100
                                 bullet_ypos = h * 200 + 100
                                 Pattern.draw_fill_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
+
                 elif a == 12 or a == 12 + 8 or a == 12 + 16 :
                     game_world.remove_object_in_layer(2)
 
@@ -461,8 +461,7 @@ class Pattern:
     def add_bullet(self):
         game_world.add_object(bullet, 2)
 
-    def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0): # 이미지 바꾸려고 하는중
-
+    def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0): 
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree, block_type)
         game_world.add_object(bullet, 2)
 
@@ -512,9 +511,10 @@ class Pattern:
             height_y = bullet_ypos - seprate * 5 + seprate * n
             height_x1 = bullet_xpos + seprate * 5
             height_x2 = bullet_xpos - seprate * 5
+
             if n != 5 and n != 4 and n != 6:
                 # 가로
-                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BLOCK)
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BULLET)
                 self.fire(width_x, width_y2, 0, -90, bullet_speed, 0, TYPE_BLOCK)
                 # 세로
                 self.fire(height_x1, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
