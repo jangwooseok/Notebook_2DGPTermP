@@ -26,7 +26,7 @@ class InfiniteBackground:
 
 
     def update(self):
-        self.y += 1
+        self.y -= 1
         if self.y + 1000 > 3000:
             self.h2 = self.y + 1000 - 3000
             self.h1 -= self.h2
