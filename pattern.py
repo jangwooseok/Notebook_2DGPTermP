@@ -145,7 +145,7 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 29:
+            if a < 30:
                 k = a % 15 + 5
 
 
@@ -162,7 +162,6 @@ class Pattern2:
 
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
-                    game_world.remove_object_in_layer(3)
 
                     bullet_amount = 5
                     seprate = 35
@@ -174,7 +173,7 @@ class Pattern2:
                                 bullet_ypos = h * 200 + 100
                                 Pattern.draw_fill_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
 
-                elif a == 12 or a == 12 + 8 or a == 12 + 16 :
+                elif a == 13 or a == 13 + 8 or a == 13 + 16 :
                     game_world.remove_object_in_layer(2)
 
 
@@ -227,47 +226,46 @@ class Pattern3:
                 if a < 4:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 10 and n != 11:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif (4 == a ) or a == 14 or (a == 9 ):
                     for n in range(bullet_amount):
                         if n < 2 or n > 11:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif 5 <= a and a < 9:
                     for n in range(bullet_amount):
                         if n != 6 and n != 7 :
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif a == 11 or a == 10:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 9 and n != 10:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
-
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
                 elif a == 12:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 9:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif a == 13:
                     for n in range(bullet_amount):
                         if n == 0 or n == 1 or n == 9 or n == 12:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif a == 15 or a == 16:
                     for n in range(bullet_amount):
                         if n != 7 and n != 8 and n != 10 and n != 11:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif a == 17:
                     for n in range(bullet_amount):
                         if n != 10 and n != 11:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 elif 18 <= a and a < 23 :
                     for n in range(bullet_amount):
                         if n < 23 - a or n == 12:
-                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0)
+                            Pattern.fire(seprate * (n), bullet_ypos, 0, bullet_move_down, bullet_speed, 0, TYPE_BLOCK)
 
                 a += 1
 
@@ -380,17 +378,31 @@ class Pattern5:
 
                 if a == 0:
                     seprate = 60
-                if a == 1:
+                elif a == 1:
                     seprate = 50
-                if a == 2:
+                elif a == 2:
                     seprate = 40
-                if a == 3:
+                elif a == 3:
                     seprate = 35
-                if a == 4:
+                elif a == 4:
                     seprate = 30
                 if a < 5:
-                    game_world.remove_object_in_layer(2)
-                Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
+                    #game_world.remove_object_in_layer(2)
+                    Pattern.draw_pattern5_empty_square(bullet_xpos, bullet_ypos, bullet_amount, seprate)
+
+                if a == 1:
+                    bullet_xpos = 300
+                    bullet_ypos = 600
+                    bullet_amount = 21
+                    seprate = 30
+                    for n in range(bullet_amount):
+                        width_x = bullet_xpos - seprate * 10 + seprate * n
+                        height_y = 600
+
+                        Pattern.fire(width_x, height_y, 0, -90, 1, 0)
+                    pass
+
+
 
                 a += 1
             else:
@@ -405,7 +417,8 @@ next_state_table = {
     Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
     Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
     Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5}
+    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
+    Pattern5: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5}
 }
 
 
@@ -422,7 +435,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Pattern5
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -461,7 +474,7 @@ class Pattern:
     def add_bullet(self):
         game_world.add_object(bullet, 2)
 
-    def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0): 
+    def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0):
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree, block_type)
         game_world.add_object(bullet, 2)
 
@@ -478,24 +491,23 @@ class Pattern:
     def draw_DIE(self, k, bullet_xpos, bullet_ypos, bullet_speed):
         if k == 0 or k == 4:
             for n in range(10):
-                self.fire(bullet_xpos, bullet_ypos, 0, -115 + n, bullet_speed, 0)  # D
-                self.fire(bullet_xpos, bullet_ypos, 0, -90 + n / 2, bullet_speed, 0)  # I
-                self.fire(bullet_xpos, bullet_ypos, 0, -90 - n / 2, bullet_speed, 0)  # I
+                self.fire(bullet_xpos, bullet_ypos, 0, -115 + n, bullet_speed, 0, TYPE_BULLET)  # D
+                self.fire(bullet_xpos, bullet_ypos, 0, -90 + n / 2, bullet_speed, 0, TYPE_BULLET)  # I
+                self.fire(bullet_xpos, bullet_ypos, 0, -90 - n / 2, bullet_speed, 0, TYPE_BULLET)  # I
 
         if 1 <= k and k <= 3:
-            self.fire(bullet_xpos, bullet_ypos, 0, -115 + 12, bullet_speed, 0)  # D
+            self.fire(bullet_xpos, bullet_ypos, 0, -115 + 12, bullet_speed, 0, TYPE_BULLET)  # D
 
         if k == 0 or k == 2 or k == 4:
             for n in range(10):
-                self.fire(bullet_xpos, bullet_ypos, 0, -75 + n, bullet_speed, 0)  # E
+                self.fire(bullet_xpos, bullet_ypos, 0, -75 + n, bullet_speed, 0, TYPE_BULLET)  # E
 
         if k < 5:
-            self.fire(bullet_xpos, bullet_ypos, 0, -115, bullet_speed, 0)  # D
-            self.fire(bullet_xpos, bullet_ypos, 0, -90, bullet_speed, 0)  # I
-            self.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0)  # E
+            self.fire(bullet_xpos, bullet_ypos, 0, -115, bullet_speed, 0, TYPE_BULLET)  # D
+            self.fire(bullet_xpos, bullet_ypos, 0, -90, bullet_speed, 0, TYPE_BULLET)  # I
+            self.fire(bullet_xpos, bullet_ypos, 0, -75, bullet_speed, 0, TYPE_BULLET)  # E
             pass
 
-    # 사각형 만드는 함수 만들려고 하던 중임 - 미완
     def draw_empty_square(self, bullet_xpos, bullet_ypos, bullet_speed):
         # 사각형 크기 bullet_amount X seprate
         bullet_amount = 11
@@ -514,7 +526,7 @@ class Pattern:
 
             if n != 5 and n != 4 and n != 6:
                 # 가로
-                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BULLET)
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BLOCK)
                 self.fire(width_x, width_y2, 0, -90, bullet_speed, 0, TYPE_BLOCK)
                 # 세로
                 self.fire(height_x1, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
