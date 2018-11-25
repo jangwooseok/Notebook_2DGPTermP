@@ -49,5 +49,5 @@ class Bullet:
 
         self.radian -= self.delta_radian * PI * (1200 - self.radius) * 1/2800
 
-        if self.radius > 800 or self.radius < 0 :
+        if self.radius > 900 or self.radius < 0:
             game_world.remove_object(self)

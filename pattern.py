@@ -81,7 +81,7 @@ class Pattern1:
             Pattern.add_time = 0
 
 
-            if a < 22:
+            if a < 22 + 33:
                 Pattern.fireSound.play(1)
                 #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
                 if a < 10:
@@ -145,8 +145,8 @@ class Pattern2:
         if Pattern.add_time >= 0.8:
             Pattern.add_time = 0
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
-            if a < 30:
-                k = a % 15 + 5
+            if a < 35:
+                k = a % 15
 
 
                 if a == 6 or a == 6 + 8 or a == 6 + 16 :
@@ -222,7 +222,7 @@ class Pattern3:
             bullet_move_down = -90
 
 
-            if a < 25:
+            if a < 30:
                 if a < 4:
                     for n in range(bullet_amount):
                         if n != 2 and n != 3 and n != 10 and n != 11:
@@ -309,22 +309,24 @@ class Pattern4:
 
             bullet_speed = 2.0
             bullet_ypos = 800
+
             bullet_xpos = 300
 
-            if a < 13 * 4:
+            if a < 13 * 4 + 30:
                 k = a % 13
-                Pattern.draw_DIE(k, bullet_xpos, bullet_ypos, bullet_speed)
-                if k == 7:
-                    for n in range(15):
-                        for i in range(5):
-                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 75 * i + 3 * n, bullet_speed, -0.4)
-                if k == 10:
-                    for n in range(15):
-                        for i in range(6):
-                            Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + 3 * n, bullet_speed, 0.7)
+                if a < 53:
+                    Pattern.draw_DIE(k, bullet_xpos, bullet_ypos, bullet_speed)
+                    if k == 7:
+                        for n in range(15):
+                            for i in range(5):
+                                Pattern.fire(bullet_xpos, bullet_ypos, 0, 75 * i + 3 * n, bullet_speed, -0.4)
+                    if k == 10:
+                        for n in range(15):
+                            for i in range(6):
+                                Pattern.fire(bullet_xpos, bullet_ypos, 0, 60 * i + 3 * n, bullet_speed, 0.7)
 
                 a += 1
-
+                print(a)
             else :
                 Pattern.add_event(PATTERN5)
         pass
@@ -485,7 +487,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern5
+        self.cur_state = Pattern1
         self.cur_state.enter(self, None)
 
         self.add_time = 0
