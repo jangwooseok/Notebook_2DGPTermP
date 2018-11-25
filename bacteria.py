@@ -51,7 +51,7 @@ class IdleState:
     @staticmethod
     def enter(bacteria, event):
         if event == RIGHT_DOWN:
-            bacteria.x_velocity = RUN_SPEED_PPS
+            bacteria.x_velocity = +RUN_SPEED_PPS
         elif event == LEFT_DOWN:
             bacteria.x_velocity = -RUN_SPEED_PPS
         elif event == RIGHT_UP:
@@ -95,22 +95,22 @@ class RunState:
         #    RUN_SPEED_PPS = RUN_SPEED_PPS * 2
 
         if event == RIGHT_DOWN:
-            bacteria.x_velocity = RUN_SPEED_PPS
+            bacteria.x_velocity += RUN_SPEED_PPS
         elif event == LEFT_DOWN:
-            bacteria.x_velocity = -RUN_SPEED_PPS
+            bacteria.x_velocity -= RUN_SPEED_PPS
         elif event == RIGHT_UP:
-            bacteria.x_velocity = 0
+            bacteria.x_velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
-            bacteria.x_velocity = 0
+            bacteria.x_velocity += RUN_SPEED_PPS
 
         elif event == UP_DOWN:
-            bacteria.y_velocity = RUN_SPEED_PPS
+            bacteria.y_velocity += RUN_SPEED_PPS
         elif event == DOWN_DOWN:
-            bacteria.y_velocity = -RUN_SPEED_PPS
+            bacteria.y_velocity -= RUN_SPEED_PPS
         elif event == UP_UP:
-            bacteria.y_velocity = 0
+            bacteria.y_velocity -= RUN_SPEED_PPS
         elif event == DOWN_UP:
-            bacteria.y_velocity = 0
+            bacteria.y_velocity += RUN_SPEED_PPS
         bacteria.dir = clamp(-1, bacteria.x_velocity, 1)
         bacteria.dir = clamp(-1, bacteria.y_velocity, 1)
         # fill here
