@@ -135,7 +135,8 @@ class RunState:
         bacteria.frame = (bacteria.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 5
         bacteria.x += bacteria.x_velocity * game_framework.frame_time
         bacteria.y += bacteria.y_velocity * game_framework.frame_time
-
+        bacteria.x = clamp(0,bacteria.x,600)
+        bacteria.y = clamp(0,bacteria.y,1000)
         for bullet in game_world.objects[2]:
             if bacteria.isImmune == True:
                 #print('놉')

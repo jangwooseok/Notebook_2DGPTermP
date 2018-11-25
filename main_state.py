@@ -9,11 +9,13 @@ import game_world
 from pattern import Pattern
 from bacteria import Bacteria
 from bullet import Bullet
+from background import InfiniteBackground as Background
 
 
 name = "MainState"
 
 boy = None
+background = None
 
 def enter():
     global pattern, bacteria
@@ -22,7 +24,11 @@ def enter():
     bacteria = Bacteria()
     game_world.add_object(pattern, 0)
     game_world.add_object(bacteria, 1)
-    
+
+    global background
+    background = Background()
+    game_world.add_object(background, 0)
+
 
 
 def exit():
