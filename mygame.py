@@ -6,7 +6,7 @@ import title_state
 
 import main_state
 
-pico2d.open_canvas(600, 1000, True, False)
+pico2d.open_canvas(600 + 500, 1000, True, False)
 #game_framework.run(start_state)
 #game_framework.run(title_state)
 game_framework.run(main_state)
