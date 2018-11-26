@@ -126,7 +126,7 @@ class RunState:
 
         if bacteria.isImmune == True:
             bacteria.timeAfterCollide = get_time() - bacteria.collideTime
-            if bacteria.timeAfterCollide >= 3:
+            if bacteria.timeAfterCollide >= 1:
                 bacteria.timeAfterCollide = 0
                 bacteria.collideTime = 0
                 bacteria.isImmune = False
@@ -146,7 +146,6 @@ class RunState:
                     bacteria.bgm.play(1)
                     bacteria.isImmune = True
                     bacteria.collideTime = get_time()
-                    print('충도오롱랴오렁노허ㅣㅁㄴ홈허ㅏㅗㅎ')
 
 
 
