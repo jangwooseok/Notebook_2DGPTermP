@@ -7,7 +7,8 @@ class InfiniteBackground:
 
 
     def __init__(self):
-        self.image = load_image('ground_600x3000.png')
+        #self.image = load_image('ground_600x3000.png')
+        self.image = load_image('test_ground.png')
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
         self.w = self.image.w
