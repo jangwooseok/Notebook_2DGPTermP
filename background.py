@@ -4,37 +4,58 @@ from pico2d import *
 
 
 class InfiniteBackground:
+
+
     def __init__(self):
         self.image = load_image('ground_600x3000.png')
         self.canvas_width = get_canvas_width()
         self.canvas_height = get_canvas_height()
-
-        self.y = 0
-        self.h1 = 1000
-        self.h2 = 0
+        self.w = self.image.w
+        self.h = self.image.h
 
         self.bgm = load_music('Undertale OST_ 072 - Song That Might Play When You Fight Sans.mp3')
         self.bgm.set_volume(64)
         self.bgm.repeat_play()
 
+        self.center_x = 300
+        self.center_y = 500
+
 
     def draw(self):
-        #self.image.clip_draw(0, 0, 600, 1000, 300, 500, 600, 1000)                        # quadrant 3
-        self.image.clip_draw(0, self.y, 600, self.y + self.h1, 300, self.y, 600, self.y + self.h1)                        # quadrant 3
-        self.image.clip_draw(0, 1000 - self.y, 600, self.h2, 0, 0, 1200, self.h2)                        # quadrant 3
-
+        self.image.clip_draw_to_origin(self.q3l, self.q3b, self.q3w, self.q3h, 0, 0)                        # quadrant 3
+        # fill here
+        self.image.clip_draw_to_origin(self.q3l, self.q3b, self.q3w, self.q3h, 0, 0)
+        self.image.clip_draw_to_origin(self.q2l, self.q2b, self.q2w, self.q2h, 0, self.q3h)
+        self.image.clip_draw_to_origin(self.q4l, self.q4b, self.q4w, self.q4h, self.q3w, 0)
+        self.image.clip_draw_to_origin(self.q1l, self.q1b, self.q1w, self.q1h, self.q3w, self.q3h)
 
 
     def update(self):
-        self.y -= 1
-        if self.y + 1000 > 3000:
-            self.h2 = self.y + 1000 - 3000
-            self.h1 -= self.h2
-        if self.y >= 3000:
-            self.h2 = 0
-            self.h1 = 1000
+        self.center_y += 1
+        # quadrant 3
+        # fill here
+        self.q3l = (int(self.center_x) - self.canvas_width // 2) % self.w
+        self.q3b = (int(self.center_y) - self.canvas_height // 2) % self.h
+        self.q3w = clamp(0, self.w - self.q3l, self.w)
+        self.q3h = clamp(0, self.h - self.q3b, self.h)
 
+        # quadrant 2
+        self.q2l = self.q3l
+        self.q2b = 0
+        self.q2w = self.q3w
+        self.q2h = self.canvas_height - self.q3h
 
+        # quadrand 4
+        self.q4l = 0
+        self.q4b = self.q3b
+        self.q4w = self.canvas_width - self.q3w
+        self.q4h = self.q3h
+
+        # quadrand 1
+        self.q1l = 0
+        self.q1b = 0
+        self.q1w = self.q4w
+        self.q1h = self.q2h
 
     def handle_event(self, event):
         pass
