@@ -12,10 +12,12 @@ COLLIDE_SIZE = 23
 
 TYPE_BULLET = 0
 TYPE_BLOCK = 1
+TYPE_WARNNING = 2
 
 class Bullet:
     image_bullet = None
     image_block = None
+    image_warnning = None
 
     def __init__(self, x = 400, y = 800, radius = 0, degree = -90, delta_radius = 1, delta_degree = 0, type = TYPE_BULLET): # 1이면 블럭 모양 출력
         self.radius = radius
@@ -27,7 +29,8 @@ class Bullet:
             Bullet.image_bullet = load_image('WhiteBloodCell_50x50.png')
         if Bullet.image_block == None:
             Bullet.image_block = load_image('block_50x50.png')
-
+        if Bullet.image_warnning == None:
+            Bullet.image_warnning = load_image('warnning_150x150.PNG')
 
         self.x, self.y = x, y
 
@@ -39,6 +42,9 @@ class Bullet:
             self.image_bullet.draw(self.bulletX, self.bulletY)
         if self.type == TYPE_BLOCK:
             self.image_block.draw(self.bulletX, self.bulletY)
+        if self.type == TYPE_WARNNING:
+            self.image_warnning.draw(self.bulletX, self.bulletY)
+
 
     def get_bb(self):
         return COLLIDE_SIZE, self.bulletX, self.bulletY

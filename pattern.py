@@ -30,6 +30,8 @@ FRAMES_PER_ACTION = 8
 
 TYPE_BULLET = 0
 TYPE_BLOCK = 1
+TYPE_WARNNING = 2
+
 
 
 # Boy Event
@@ -155,7 +157,7 @@ class Pattern2:
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
                         safeZoneY[n] = random.randint(0, 5)
-                        Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_BULLET)
+                        Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_WARNNING)
 
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
