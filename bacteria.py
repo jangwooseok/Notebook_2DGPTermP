@@ -16,8 +16,6 @@ import main_state
 
 RUN_SPEED_PPS = 150
 
-COLLIDE_SIZE = 10
-DRAW_SIZE = COLLIDE_SIZE * 2
 
 # Boy Action Speed
 # fill expressions correctly
@@ -146,7 +144,9 @@ class RunState:
                     bacteria.bgm.play(1)
                     bacteria.isImmune = True
                     bacteria.collideTime = get_time()
-
+                    bacteria.collideSize -= 2
+                    bacteria.draw_size = bacteria.collideSize * 2
+                    #if bacteria.collideSize:
 
 
         #bacteria.x = clamp(25, bacteria.x, 1600 - 25)
@@ -155,9 +155,9 @@ class RunState:
     def draw(bacteria):
         bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
         if bacteria.isImmune == True:
-            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, DRAW_SIZE, DRAW_SIZE)
+            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
         elif bacteria.isImmune == False:
-            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, DRAW_SIZE, DRAW_SIZE)
+            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
 
         pass
 
@@ -188,6 +188,9 @@ class Bacteria:
         self.cur_state = RunState
         self.cur_state.enter(self, None)
 
+        self.collideSize = 10
+        self.draw_size = self.collideSize * 2
+
         self.isImmune = False
         self.timeAfterCollide, self.collideTime = 0, 0
         #self.isImmune = True
@@ -214,7 +217,7 @@ class Bacteria:
         # fill here
 
     def get_bb(self):
-        return COLLIDE_SIZE - 3, self.x, self.y
+        return  self.collideSize - 3, self.x, self.y
 
     def handle_event(self, event):
         if (event.type, event.key) in key_event_table:

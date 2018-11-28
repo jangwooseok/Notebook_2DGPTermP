@@ -147,7 +147,12 @@ class Pattern2:
             if a < 32:
                 k = a % 15
 
-                if a == 5 or a == 5 + 8 or a == 5 + 16 :
+                if a == 6 or a == 6 + 8 or a == 6 + 16 :
+                    #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
+                    for h in range(5):
+                        for w in range(3):
+                            Pattern.draw_empty_square(200 * w + 100, 200 * h +100, bullet_speed)
+                        #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
                         safeZoneY[n] = random.randint(0, 4)
@@ -156,19 +161,12 @@ class Pattern2:
                         for h in range(5):
                             if not(w == safeZoneX[0] and h == safeZoneY[0]) and not(w == safeZoneX[1] and h == safeZoneY[1]) and not(w == safeZoneX[2] and h == safeZoneY[2]):
                                 Pattern.fire_not_collide(w * 200 + 100, h * 200 + 100, 0, 0, 0, 0, TYPE_WARNNING)
-
-                if a == 6 or a == 6 + 8 or a == 6 + 16 :
-                    #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
-                    for h in range(5):
-                        for w in range(3):
-                            Pattern.draw_empty_square(200 * w + 100, 200 * h +100, bullet_speed)
-                        #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
-
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
 
                     bullet_amount = 5
                     seprate = 35
+                    game_world.remove_object_in_layer(3)
 
                     for h in range(5):
                         for w in range(3):
