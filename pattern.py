@@ -163,8 +163,6 @@ class Pattern2:
                             if not(w == safeZoneX[0] and h == safeZoneY[0]) and not(w == safeZoneX[1] and h == safeZoneY[1]) and not(w == safeZoneX[2] and h == safeZoneY[2]):
                                 Pattern.fire(w * 200 + 100, h * 200 + 100, 0, 0, 0, 0, TYPE_WARNNING)
 
-                                    #Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_WARNNING)
-
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
 
@@ -180,7 +178,6 @@ class Pattern2:
 
                 elif a == 13 or a == 13 + 8 or a == 13 + 16 :
                     game_world.remove_object_in_layer(2)
-
 
                 a += 1
             else:
