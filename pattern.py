@@ -156,8 +156,14 @@ class Pattern2:
                         #Pattern.draw_square(bullet_xpos, bullet_ypos, 0)
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
-                        safeZoneY[n] = random.randint(0, 5)
-                        Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_WARNNING)
+                        safeZoneY[n] = random.randint(0, 4)
+
+                    for w in range(3):
+                        for h in range(5):
+                            if not(w == safeZoneX[0] and h == safeZoneY[0]) and not(w == safeZoneX[1] and h == safeZoneY[1]) and not(w == safeZoneX[2] and h == safeZoneY[2]):
+                                Pattern.fire(w * 200 + 100, h * 200 + 100, 0, 0, 0, 0, TYPE_WARNNING)
+
+                                    #Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_WARNNING)
 
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
