@@ -144,7 +144,7 @@ class RunState:
                     bacteria.bgm.play(1)
                     bacteria.isImmune = True
                     bacteria.collideTime = get_time()
-                    bacteria.collideSize -= 2
+                    bacteria.collideSize -= 1.5
                     bacteria.draw_size = bacteria.collideSize * 2
                     #if bacteria.collideSize:
 
