@@ -155,7 +155,7 @@ class Pattern2:
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
                         safeZoneY[n] = random.randint(0, 5)
-                        Pattern.fire(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_BULLET)
+                        Pattern.fire_not_collide(200 * safeZoneX[n] + 100, 200 * safeZoneY[n] + 100, 0, 0, bullet_speed, 0, TYPE_BULLET)
 
                 elif a == 11 or a == 11 + 8 or a == 11 + 16:
                     game_world.remove_object_in_layer(2)
@@ -571,11 +571,11 @@ class Pattern:
 
             if n != 5 and n != 4 and n != 6:
                 # 가로
-                self.fire_not_collide(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BLOCK)
-                self.fire_not_collide(width_x, width_y2, 0, -90, bullet_speed, 0, TYPE_BLOCK)
+                self.fire(width_x, width_y1, 0, -90, bullet_speed, 0, TYPE_BLOCK)
+                self.fire(width_x, width_y2, 0, -90, bullet_speed, 0, TYPE_BLOCK)
                 # 세로
-                self.fire_not_collide(height_x1, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
-                self.fire_not_collide(height_x2, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
+                self.fire(height_x1, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
+                self.fire(height_x2, height_y, 0, -90, bullet_speed, 0, TYPE_BLOCK)
 
     def draw_pattern5_empty_square(self, bullet_xpos, bullet_ypos, bullet_amount, seprate):
         # 사각형 크기 bullet_amount X seprate
