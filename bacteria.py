@@ -151,12 +151,14 @@ class RunState:
 
         #bacteria.x = clamp(25, bacteria.x, 1600 - 25)
 
-
+    def update(bacteria):
+        bacteria.frame = (bacteria.frame + 100) % 4
     def draw(bacteria):
-        bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
-        if bacteria.isImmune == True:
+        if bacteria.isImmune == True:       #피격시 (무적)
+            bacteria.image_hit.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
             bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
         elif bacteria.isImmune == False:
+            bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
             bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
 
         pass
@@ -177,6 +179,7 @@ class Bacteria:
         self.collideRadius = 50
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('Bacteria_100x500.png')
+        self.image_hit = load_image('Bacteria_hit_100x500.png')
         self.imageIdle = load_image('Bacteria_idle_30x30.png')
         self.imageImmune = load_image('Bacteria_immune_30x30.png')
         self.font = load_font('ENCR10B.TTF',16)
