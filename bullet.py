@@ -43,6 +43,7 @@ class Bullet:
         if self.type == TYPE_BLOCK:
             self.image_block.draw(self.bulletX, self.bulletY)
         if self.type == TYPE_WARNNING:
+            self.image_warnning.opacify(0.3)
             self.image_warnning.draw(self.bulletX, self.bulletY)
 
 
