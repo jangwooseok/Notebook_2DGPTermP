@@ -14,8 +14,9 @@ class InfiniteBackground:
         self.w = self.image.w
         self.h = self.image.h
 
+        self.volumeSize = 64
         self.bgm = load_music('Undertale OST_ 072 - Song That Might Play When You Fight Sans.mp3')
-        self.bgm.set_volume(64)
+        self.bgm.set_volume(self.volumeSize)
         self.bgm.repeat_play()
 
         self.center_x = 300
@@ -33,6 +34,7 @@ class InfiniteBackground:
 
     def update(self):
         self.center_y += 1
+
         # quadrant 3
         # fill here
         self.q3l = (int(self.center_x) - self.canvas_width // 2) % self.w

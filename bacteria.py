@@ -37,7 +37,6 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_DOWN): DOWN_DOWN,
     (SDL_KEYUP, SDLK_UP): UP_UP,
     (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
-    (SDL_KEYDOWN, SDLK_LSHIFT): SHIFT_DOWN,
     (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP
 }
 
@@ -138,7 +137,6 @@ class RunState:
         bacteria.y = clamp(0,bacteria.y,1000)
         for bullet in game_world.objects[2]:
             if bacteria.isImmune == True:
-                #print('놉')
                 break
             else:
                 if main_state.collide(bacteria, bullet):
@@ -170,14 +168,14 @@ next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
                 UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState},
     RunState: {RIGHT_UP: RunState, LEFT_UP: RunState, LEFT_DOWN: RunState, RIGHT_DOWN: RunState,
-               UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState, SHIFT_UP: RunState, SHIFT_UP: RunState}
+               UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState}
 }
 
 class Bacteria:
 
     def __init__(self):
         self.x, self.y = 300, 100
-        self.collideRadius = 50
+        self.collideRadius = 60
         # Boy is only once created, so instance image loading is fine
         self.image = load_image('Bacteria_100x500.png')
         self.image_hit = load_image('Bacteria_hit_100x500.png')
@@ -200,7 +198,7 @@ class Bacteria:
         #self.isImmune = True
 
         self.bgm = load_wav('untitled.ogg')
-        self.bgm.set_volume(64)
+        self.bgm.set_volume(128)
 
 
 
