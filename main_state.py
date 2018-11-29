@@ -3,8 +3,13 @@ import json
 import os
 
 from pico2d import *
+
+import bacteria
 import game_framework
 import game_world
+
+import end_state_lose
+import end_state_win
 
 from pattern import Pattern
 from bacteria import Bacteria
@@ -18,6 +23,8 @@ boy = None
 background = None
 
 def enter():
+    print('main 들어감')
+
     global pattern, bacteria
     global bullet
     pattern = Pattern()
@@ -28,8 +35,6 @@ def enter():
     global background
     background = Background()
     game_world.add_object(background, 0)
-
-
 
 def exit():
     game_world.clear()
@@ -62,16 +67,19 @@ def handle_events():
         else:
             bacteria.handle_event(event)
 
+#def gotowin():
+#    game_framework.change_state(end_state_win)
+#
+#def gotolose():
+#    game_framework.change_state(end_state_lose)
 
 def update():
+    global bacteria
     for game_object in game_world.all_objects():
         game_object.update()
+    if bacteria.HP <= 0:
+        game_framework.change_state(end_state_win)
 
-    # boy = main_state.get_boy()
-
-    if collide(bacteria, pattern):
-        #충돌 후 효과는 여기서 하면 됨
-        print("COLLISION")
 
 def draw():
     clear_canvas()

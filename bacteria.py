@@ -5,6 +5,8 @@ import random
 
 import game_world
 import main_state
+import end_state_lose
+import end_state_win
 
 # Boy Run Speed
 # fill expressions correctly
@@ -135,6 +137,27 @@ class RunState:
         bacteria.y += bacteria.y_velocity * game_framework.frame_time
         bacteria.x = clamp(0,bacteria.x,600)
         bacteria.y = clamp(0,bacteria.y,1000)
+
+        #충돌체크
+
+                        #game_framework.change_state(title_state)
+
+
+
+    #bacteria.x = clamp(25, bacteria.x, 1600 - 25)
+
+    def update(bacteria):
+        bacteria.frame = (bacteria.frame + 100) % 4
+
+
+    def draw(bacteria):
+        if bacteria.isImmune == True:       #피격시 (무적)
+            bacteria.image_hit.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
+            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
+        elif bacteria.isImmune == False:
+            bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
+            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
+
         for bullet in game_world.objects[2]:
             if bacteria.isImmune == True:
                 break
@@ -145,20 +168,12 @@ class RunState:
                     bacteria.collideTime = get_time()
                     bacteria.collideSize -= 1.5
                     bacteria.draw_size = bacteria.collideSize * 2
-                    #if bacteria.collideSize:
+
+                    bacteria.HP -= 1
 
 
-        #bacteria.x = clamp(25, bacteria.x, 1600 - 25)
 
-    def update(bacteria):
-        bacteria.frame = (bacteria.frame + 100) % 4
-    def draw(bacteria):
-        if bacteria.isImmune == True:       #피격시 (무적)
-            bacteria.image_hit.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
-            bacteria.imageIdle.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
-        elif bacteria.isImmune == False:
-            bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
-            bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
+                        #game_framework.change_state(end_state_win)
 
         pass
 
@@ -201,6 +216,8 @@ class Bacteria:
         self.bgm.set_volume(128)
 
 
+        self.HP = 3
+
 
     def add_event(self, event):
         self.event_que.insert(0, event)
@@ -212,6 +229,8 @@ class Bacteria:
             self.cur_state.exit(self, event)
             self.cur_state = next_state_table[self.cur_state][event]
             self.cur_state.enter(self, event)
+
+
 
     def draw(self):
         self.cur_state.draw(self)

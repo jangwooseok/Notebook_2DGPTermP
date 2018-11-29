@@ -30,6 +30,7 @@ class Bullet:
         if Bullet.image_block == None:
             Bullet.image_block = load_image('block_50x50.png')
         if Bullet.image_warnning == None:
+            #Bullet.image_warnning = load_image('warnning_150x150.PNG')
             Bullet.image_warnning = load_image('warnning_150x150.PNG')
 
         self.x, self.y = x, y

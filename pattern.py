@@ -517,12 +517,10 @@ class Pattern:
             key_event = key_event_table[(event.type, event.key)]
             self.add_event(key_event)
 
-    def add_bullet(self):
-        game_world.add_object(bullet, 2)
-
     def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0):
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree, block_type)
         game_world.add_object(bullet, 2)
+
     def fire_not_collide(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0):
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree, block_type)
         game_world.add_object(bullet, 3)
