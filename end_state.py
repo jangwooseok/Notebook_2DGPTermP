@@ -4,7 +4,7 @@ from pico2d import *
 
 import main_state
 
-name = "TitleState"
+name = "endState"
 image = None
 logo_time = 0.0
 
@@ -14,8 +14,8 @@ logo_time = 0.0
 
 def enter():
     global image, titleSound
-    image = load_image('title.png')
-    titleSound = load_music('title_BGM.mp3')
+    image = load_image('end.png')
+    titleSound = load_music('ending.mp3')
     titleSound.set_volume(64)
     titleSound.repeat_play()
     pass
