@@ -109,6 +109,7 @@ class RunState:
             bacteria.y_velocity -= RUN_SPEED_PPS
         elif event == DOWN_UP:
             bacteria.y_velocity += RUN_SPEED_PPS
+
         bacteria.dir = clamp(-1, bacteria.x_velocity, 1)
         bacteria.dir = clamp(-1, bacteria.y_velocity, 1)
         # fill here
