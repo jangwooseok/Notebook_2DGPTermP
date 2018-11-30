@@ -8,7 +8,7 @@ import main_state
 
 PI = 3.141592
 
-COLLIDE_SIZE = 23
+COLLIDE_SIZE = 22
 
 TYPE_BULLET = 0
 TYPE_BLOCK = 1
@@ -43,7 +43,7 @@ class Bullet:
     def draw(self):
         #self.image.draw(self.x, self.y)
         if self.type == TYPE_BULLET:
-            self.image_bullet.draw(self.bulletX, self.bulletY)
+            self.image_bullet.clip_draw(0, 0, 50, 50, self.bulletX, self.bulletY, COLLIDE_SIZE * 2 + 2, COLLIDE_SIZE * 2 + 2)
         if self.type == TYPE_BLOCK:
             self.image_block.draw(self.bulletX, self.bulletY)
         if self.type == TYPE_WARNNING:

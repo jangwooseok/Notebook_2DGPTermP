@@ -535,7 +535,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern5
+        self.cur_state = Pattern1
         self.cur_state.enter(self, None)
 
         self.add_time = 0
