@@ -31,19 +31,15 @@ FRAMES_PER_ACTION = 8
 TYPE_BULLET = 0
 TYPE_BLOCK = 1
 TYPE_WARNNING = 2
+TYPE_HEART = 3
 
 
 
 # Boy Event
-PATTERN1, PATTERN2, PATTERN3, PATTERN4, PATTERN5 = range(5)
+PATTERN1, PATTERN2, PATTERN3, PATTERN4, PATTERN5, HEART = range(6)
 
 key_event_table = {
 }
-
-
-# 이거 쓰면 값을 받아 올 수 있음
-#boy = main_state.get_boy()
-
 
 
 # States
@@ -180,7 +176,7 @@ class Pattern2:
 
                 a += 1
             else:
-                Pattern.add_event(PATTERN3)
+                Pattern.add_event(HEART)
         pass
 
     @staticmethod
@@ -462,12 +458,65 @@ class Pattern5:
     def draw(Pattern):
         pass
 
+
+class Heart:
+
+    @staticmethod
+    def enter(Pattern, event):
+        print('HEART ENTER')
+        global bullet
+        global a, start_time
+        Pattern.add_time = 0
+        Pattern.current_time = get_time()
+
+        a = 0
+        start_time = get_time()
+        pass
+
+    @staticmethod
+    def exit(Pattern, event):
+        pass
+
+    @staticmethod
+    def do(Pattern):
+        global bullet
+        global start_time, a
+        Pattern.add_time += get_time() - Pattern.current_time
+        Pattern.current_time = get_time()
+
+        bullet_speed = 0.0
+        bullet_ypos = 700
+        bullet_xpos = 300
+
+        bullet_amount = 11
+        seprate = 3
+
+        right = 0
+        up = 90
+        left = 180
+        down = 270
+
+        if Pattern.add_time >= 0.8:
+            Pattern.add_time = 0
+            #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
+
+            if a == 1:
+                Pattern.fire(bullet_xpos, bullet_ypos, 0, 0, bullet_speed, 0.0, TYPE_HEART)
+
+
+
+            a += 1
+
+    def draw(Pattern):
+        pass
+
 next_state_table = {
-    Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5},
-    Pattern5: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5}
+    Pattern1: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5, HEART: Heart},
+    Pattern2: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5, HEART: Heart},
+    Pattern3: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5, HEART: Heart},
+    Pattern4: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5, HEART: Heart},
+    Pattern5: {PATTERN1: Pattern1, PATTERN2: Pattern2, PATTERN3: Pattern3, PATTERN4: Pattern4, PATTERN5: Pattern5, HEART: Heart},
+    Heart: {}
 }
 
 
@@ -484,7 +533,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Pattern2
+        self.cur_state = Heart
         self.cur_state.enter(self, None)
 
         self.add_time = 0
@@ -500,7 +549,6 @@ class Pattern:
         self.event_que.insert(0, event)
 
     def update(self):
-
         self.cur_state.do(self)
         if len(self.event_que) > 0:
             event = self.event_que.pop()

@@ -23,8 +23,6 @@ boy = None
 background = None
 
 def enter():
-    print('main 들어감')
-
     global pattern, bacteria
     global bullet
     pattern = Pattern()
@@ -63,7 +61,8 @@ def handle_events():
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-                game_framework.quit()
+            game_framework.change_state(end_state_win)
+            #game_framework.quit()
         else:
             bacteria.handle_event(event)
 

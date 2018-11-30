@@ -17,12 +17,6 @@ def enter():
     Sound.repeat_play()
 
 
-    print('lose들어감')
-
-
-    pass
-
-
 def exit():
     global image_win
     global image_lose
@@ -32,23 +26,14 @@ def exit():
 
     Sound.stop()
 
-    print('lose나감')
-
-
-
-    pass
 
 
 def update():
     global logo_time
-    print('lose update')
-
     pass
 
 
 def draw():
-    print('lose draw')
-
     global image
     clear_canvas()
     image.clip_draw(0, 0, 600, 1000, 600//2, 1000//2, 600, 1000)      #(self, left, bottom, width, height, x, y, w=None, h=None):
@@ -57,8 +42,6 @@ def draw():
 
 
 def handle_events():
-    print('lose handel')
-
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:

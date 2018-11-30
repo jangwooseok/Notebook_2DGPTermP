@@ -13,11 +13,13 @@ COLLIDE_SIZE = 23
 TYPE_BULLET = 0
 TYPE_BLOCK = 1
 TYPE_WARNNING = 2
+TYPE_HEART = 3
 
 class Bullet:
     image_bullet = None
     image_block = None
     image_warnning = None
+    image_heart = None
 
     def __init__(self, x = 400, y = 800, radius = 0, degree = -90, delta_radius = 1, delta_degree = 0, type = TYPE_BULLET): # 1이면 블럭 모양 출력
         self.radius = radius
@@ -30,12 +32,13 @@ class Bullet:
         if Bullet.image_block == None:
             Bullet.image_block = load_image('block_50x50.png')
         if Bullet.image_warnning == None:
-            #Bullet.image_warnning = load_image('warnning_150x150.PNG')
             Bullet.image_warnning = load_image('warnning_150x150.PNG')
-
+        if Bullet.image_heart == None:
+            Bullet.image_heart = load_image('heart.PNG')
         self.x, self.y = x, y
 
         self.bulletX, self.bulletY = 0, 0
+        self.heart_opacity = 0
 
     def draw(self):
         #self.image.draw(self.x, self.y)
@@ -46,12 +49,20 @@ class Bullet:
         if self.type == TYPE_WARNNING:
             self.image_warnning.opacify(0.3)
             self.image_warnning.draw(self.bulletX, self.bulletY)
-
+        if self.type == TYPE_HEART:
+            self.image_heart.opacify(self.heart_opacity)
+            self.image_heart.draw(self.bulletX, self.bulletY)
 
     def get_bb(self):
+        if self.type == TYPE_HEART:
+            return 300, self.bulletX, self.bulletY
         return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
+        if self.type == TYPE_HEART:
+            if self.heart_opacity < 1:
+                self.heart_opacity += 0.005
+
         self.radius += self.delta_radius
         self.bulletX = self.x + self.radius * math.cos(self.radian)
         self.bulletY = self.y + self.radius * math.sin(self.radian)

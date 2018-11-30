@@ -19,9 +19,6 @@ def enter():
     titleSound.set_volume(64)
     titleSound.repeat_play()
 
-    print('title 들어감')
-
-
 def exit():
     global image
     del (image)
