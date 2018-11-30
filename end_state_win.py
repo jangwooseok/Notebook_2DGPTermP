@@ -18,7 +18,7 @@ def enter():
     global image_background, image_bacteria, Sound
     image_background = load_image('win.PNG')
     image_bacteria = load_image('win_bacteria.PNG')
-    Sound = load_music('ending.mp3')
+    Sound = load_music('test_win2.mp3')
     Sound.set_volume(64)
     Sound.repeat_play()
     print('이김')
@@ -26,11 +26,11 @@ def enter():
 
 
 def exit():
-    global image_win
-    global image_lose
+    global image_background
+    global image_bacteria
 
-    del (image_win)
-    del (image_lose)
+    del (image_background)
+    del (image_bacteria)
     Sound.stop()
     pass
 
@@ -38,8 +38,8 @@ def exit():
 def update():
     global logo_time
     global radian, size
-    radian += 0.01
-    size -= 5
+    radian += 0.03
+    size -= 4.5
     if size <= 400:
         size = 520
     pass

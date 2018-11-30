@@ -176,7 +176,7 @@ class Pattern2:
 
                 a += 1
             else:
-                Pattern.add_event(HEART)
+                Pattern.add_event(PATTERN3)
         pass
 
     @staticmethod
@@ -451,7 +451,7 @@ class Pattern5:
 
                 a += 1
             else:
-                Pattern.add_event(PATTERN1)
+                Pattern.add_event(HEART)
         pass
 
     @staticmethod
@@ -535,7 +535,7 @@ class Pattern:
         self.velocity = 0
         self.frame = 0
         self.event_que = []
-        self.cur_state = Heart
+        self.cur_state = Pattern5
         self.cur_state.enter(self, None)
 
         self.add_time = 0

@@ -19,11 +19,9 @@ def enter():
     print('짐')
 
 def exit():
-    global image_win
-    global image_lose
+    global image
 
-    del (image_win)
-    del (image_lose)
+    del (image)
 
     Sound.stop()
 
