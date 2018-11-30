@@ -501,7 +501,9 @@ class Heart:
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
 
             if a == 1:
-                Pattern.fire(bullet_xpos, bullet_ypos, 0, 0, bullet_speed, 0.0, TYPE_HEART)
+                bullet = Bullet(bullet_xpos, bullet_ypos, 0, 0, bullet_speed, 0.0, TYPE_HEART)
+                game_world.add_object(bullet, 4)
+                #Pattern.fire(bullet_xpos, bullet_ypos, 0, 0, bullet_speed, 0.0, TYPE_HEART)
 
 
 

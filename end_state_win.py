@@ -18,6 +18,7 @@ def enter():
     Sound = load_music('ending.mp3')
     Sound.set_volume(64)
     Sound.repeat_play()
+    print('이김')
 
 
 
@@ -27,7 +28,6 @@ def exit():
 
     del (image_win)
     del (image_lose)
-
     Sound.stop()
     pass
 

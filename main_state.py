@@ -77,8 +77,9 @@ def update():
     for game_object in game_world.all_objects():
         game_object.update()
     if bacteria.HP <= 0:
+        game_framework.change_state(end_state_lose)
+    if bacteria.End == True:
         game_framework.change_state(end_state_win)
-
 
 def draw():
     clear_canvas()

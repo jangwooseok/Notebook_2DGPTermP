@@ -8,6 +8,7 @@ import main_state
 import end_state_lose
 import end_state_win
 
+
 # Boy Run Speed
 # fill expressions correctly
 #PIXEL_PER_METER = (10.0 / 0.3)
@@ -138,9 +139,7 @@ class RunState:
         bacteria.x = clamp(0,bacteria.x,600)
         bacteria.y = clamp(0,bacteria.y,1000)
 
-        #충돌체크
 
-                        #game_framework.change_state(title_state)
 
 
 
@@ -158,6 +157,7 @@ class RunState:
             bacteria.image.clip_draw(int(bacteria.frame) * 100, 0, 100, 100, bacteria.x, bacteria.y, 75, 75)
             bacteria.imageImmune.clip_draw(0, 0, 30, 30, bacteria.x, bacteria.y, bacteria.draw_size, bacteria.draw_size)
 
+        #충돌체크
         for bullet in game_world.objects[2]:
             if bacteria.isImmune == True:
                 break
@@ -170,12 +170,16 @@ class RunState:
                     bacteria.draw_size = bacteria.collideSize * 2
 
                     bacteria.HP -= 1
+        for bullet in game_world.objects[4]:
+            if main_state.collide(bacteria, bullet):
+                print('4번 충돌')
+                bacteria.bgm.play(1)
+                bacteria.collideTime = get_time()
+                bacteria.collideSize -= 1.5
+                bacteria.draw_size = bacteria.collideSize * 2
+                bacteria.End = True
 
 
-
-                        #game_framework.change_state(end_state_win)
-
-        pass
 
 
 
@@ -217,7 +221,7 @@ class Bacteria:
 
 
         self.HP = 3
-
+        self.End = False
 
     def add_event(self, event):
         self.event_que.insert(0, event)

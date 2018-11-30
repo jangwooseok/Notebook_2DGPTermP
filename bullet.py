@@ -55,7 +55,7 @@ class Bullet:
 
     def get_bb(self):
         if self.type == TYPE_HEART:
-            return 300, self.bulletX, self.bulletY
+            return 200, self.bulletX, self.bulletY
         return COLLIDE_SIZE, self.bulletX, self.bulletY
 
     def update(self):
