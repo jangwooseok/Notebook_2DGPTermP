@@ -66,12 +66,6 @@ def handle_events():
         else:
             bacteria.handle_event(event)
 
-#def gotowin():
-#    game_framework.change_state(end_state_win)
-#
-#def gotolose():
-#    game_framework.change_state(end_state_lose)
-
 def update():
     global bacteria
     for game_object in game_world.all_objects():

@@ -32,6 +32,7 @@ TYPE_BULLET = 0
 TYPE_BLOCK = 1
 TYPE_WARNNING = 2
 TYPE_HEART = 3
+TYPE_DRUG = 4
 
 
 
@@ -112,8 +113,8 @@ class Pattern2:
         Pattern.add_time = 0
         Pattern.current_time = get_time()
 
-        safeZoneX = [0,0,0]
-        safeZoneY = [0,0,0]
+        safeZoneX = [0, 0, 0]
+        safeZoneY = [0, 0, 0]
 
         a = 0
         start_time = get_time()
@@ -142,8 +143,11 @@ class Pattern2:
             #bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree)
             if a < 32:
                 k = a % 15
+                if a == 5 or a == 5 + 8 or a == 5 + 16 :
+                    Pattern.fire(300, 700, 0, 270, bullet_speed, 0, TYPE_DRUG)
 
                 if a == 6 or a == 6 + 8 or a == 6 + 16 :
+
                     #Pattern.draw_square(bullet_amount, bullet_xpos, bullet_ypos, 0)
                     for h in range(5):
                         for w in range(3):
@@ -152,7 +156,6 @@ class Pattern2:
                     for n in range(3):
                         safeZoneX[n] = random.randint(0, 2)
                         safeZoneY[n] = random.randint(0, 4)
-
                     for w in range(3):
                         for h in range(5):
                             if not(w == safeZoneX[0] and h == safeZoneY[0]) and not(w == safeZoneX[1] and h == safeZoneY[1]) and not(w == safeZoneX[2] and h == safeZoneY[2]):
@@ -569,6 +572,7 @@ class Pattern:
 
     def fire(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0):
         bullet = Bullet(x, y, radius, degree, delta_radius, delta_degree, block_type)
+
         game_world.add_object(bullet, 2)
 
     def fire_not_collide(self, x = 300, y = 500, radius = 0, degree = 0, delta_radius = 0.0, delta_degree = 0, block_type = 0):

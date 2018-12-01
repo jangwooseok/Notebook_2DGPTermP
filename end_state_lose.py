@@ -16,7 +16,6 @@ def enter():
     Sound.set_volume(64)
     Sound.repeat_play()
 
-    print('짐')
 
 def exit():
     global image

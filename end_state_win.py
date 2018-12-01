@@ -21,7 +21,6 @@ def enter():
     Sound = load_music('test_win2.mp3')
     Sound.set_volume(64)
     Sound.repeat_play()
-    print('이김')
 
 
 

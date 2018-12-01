@@ -181,8 +181,6 @@ class RunState:
 
 
 
-
-
 next_state_table = {
     IdleState: {RIGHT_UP: RunState, LEFT_UP: RunState, RIGHT_DOWN: RunState, LEFT_DOWN: RunState,
                 UP_UP: RunState, DOWN_UP: RunState, UP_DOWN: RunState, DOWN_DOWN: RunState},
@@ -220,7 +218,7 @@ class Bacteria:
         self.bgm.set_volume(128)
 
 
-        self.HP = 3
+        self.HP = 5
         self.End = False
 
     def add_event(self, event):
