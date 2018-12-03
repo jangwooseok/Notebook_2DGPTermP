@@ -9,7 +9,7 @@ logo_time = 0.0
 
 def enter():
     global image, startSound
-    image = load_image('stop.png')
+    image = load_image('start.png')
 
     startSound = load_music('start.mp3')
     startSound.set_volume(64)
